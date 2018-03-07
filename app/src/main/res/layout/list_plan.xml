@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/kosong"
+        android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -50,6 +50,14 @@
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_more" />
+
+            <ImageView
+                android:id="@+id/imgCheck"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                android:src="@drawable/ic_check" />
 
         </RelativeLayout>
 

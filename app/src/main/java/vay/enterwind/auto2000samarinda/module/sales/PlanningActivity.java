@@ -87,6 +87,7 @@ public class PlanningActivity extends BaseActivity {
                     public void onResponse(JSONArray response) {
                         if(response.length() == 0) {
                             kosong.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
                         }
                         planList.clear();
                         for(int i = 0; i<response.length(); i++){
@@ -94,10 +95,14 @@ public class PlanningActivity extends BaseActivity {
                             try {
                                 obj = response.getJSONObject(i);
                                 Plan plan = new Plan(
+                                        obj.getString(Config.TAG_UUID),
                                         obj.getString(Config.TAG_NAMA),
+                                        obj.getString(Config.TAG_TELEPON),
                                         obj.getString(Config.TAG_ALAMAT),
                                         obj.getString(Config.TAG_STATUS),
-                                        obj.getString(Config.TAG_UUID));
+                                        obj.getString(Config.TAG_LONGITUDE),
+                                        obj.getString(Config.TAG_LATITUDE)
+                                );
                                 planList.add(plan);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -110,7 +115,7 @@ public class PlanningActivity extends BaseActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        progress.dismiss();
                     }
                 }
         );

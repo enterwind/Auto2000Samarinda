@@ -76,6 +76,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
                                 android:src="@drawable/btn_accent"
+                                android:scaleType="centerCrop"
                                 android:layout_marginLeft="15dp"
                                 android:layout_marginBottom="15dp"/>
 

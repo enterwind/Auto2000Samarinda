@@ -13,6 +13,8 @@ public class Config {
     static public final String URL_WIDGET = "http://auto2000.enterwind.com/api/v1/widget/";
 
     static public final String URL_PLAN = "http://auto2000.enterwind.com/api/v1/planning/";
+    static public final String URL_CHECKPOINT = "http://auto2000.enterwind.com/api/v1/checkpoint/";
+
 
     //JSON TAGS
     public static final String TAG_UUID = "uuid";

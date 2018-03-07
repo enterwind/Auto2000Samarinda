@@ -7,9 +7,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.camera"></uses-feature>
 
     <application
         android:allowBackup="true"
@@ -27,8 +28,12 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
 
-        <meta-data android:name="preloaded_fonts" android:resource="@array/preloaded_fonts" />
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <activity android:name=".module.sales.HomeActivity" />
         <activity android:name=".module.sales.PlanningActivity" />
@@ -37,13 +42,16 @@
         <activity android:name=".module.sales.profil.UbahProfilActivity" />
         <activity android:name=".module.sales.profil.UbahPasswordActivity" />
         <activity android:name=".module.sales.plans.AddPlanActivity" />
-
-        <activity android:name=".module.sales.plans.MapsActivity" android:label="@string/title_activity_maps" />
-        <activity android:name=".pubnub.example.LoginActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden" />
-
+        <activity
+            android:name=".module.sales.plans.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".pubnub.example.LoginActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity android:name=".pubnub.example.MainActivity" />
+        <activity android:name=".module.sales.profil.TentangActivity" />
+        <activity android:name=".module.sales.checkpoint.DetailActivity"></activity>
     </application>
 
 </manifest>

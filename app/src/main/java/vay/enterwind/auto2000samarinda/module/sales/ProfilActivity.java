@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vay.enterwind.auto2000samarinda.BaseActivity;
 import vay.enterwind.auto2000samarinda.R;
+import vay.enterwind.auto2000samarinda.module.sales.profil.TentangActivity;
 import vay.enterwind.auto2000samarinda.module.sales.profil.UbahPasswordActivity;
 import vay.enterwind.auto2000samarinda.module.sales.profil.UbahProfilActivity;
 import vay.enterwind.auto2000samarinda.session.AuthManagement;
@@ -36,6 +37,7 @@ public class ProfilActivity extends BaseActivity {
     @BindView(R.id.btnLogout) RelativeLayout btnLogout;
     @BindView(R.id.listPassword) LinearLayout btnPassword;
     @BindView(R.id.listProfil) LinearLayout listProfil;
+    @BindView(R.id.listTentang) LinearLayout listTentang;
 
     @BindView(R.id.namaLengkap) TextView namaLengkap;
     @BindView(R.id.jabatan) TextView jabatan;
@@ -88,5 +90,9 @@ public class ProfilActivity extends BaseActivity {
 
     @OnClick(R.id.listProfil) void onProfil() {
         startActivity(new Intent(mContext, UbahProfilActivity.class));
+    }
+
+    @OnClick(R.id.listTentang) void onTentang() {
+        startActivity(new Intent(mContext, TentangActivity.class));
     }
 }

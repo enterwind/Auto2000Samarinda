@@ -47,6 +47,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.MyViewHolder> 
         @BindView(R.id.txtNama) TextView txtNama;
         @BindView(R.id.txtAlamat) TextView txtAlamat;
         @BindView(R.id.imgMore) ImageView imgMore;
+        @BindView(R.id.imgCheck) ImageView imgCheck;
 
         MyViewHolder(View view) {
             super(view);
@@ -72,24 +73,30 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.MyViewHolder> 
         final Plan plan = planList.get(position);
         holder.txtNama.setText(plan.getNama());
         holder.txtAlamat.setText(plan.getAlamat());
-        holder.imgMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new BottomSheet.Builder(mContext).title("Pilih Salah Satu").sheet(R.menu.menu_plan)
-                        .listener(new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which) {
-                                    case R.id.hapus:
-                                        hapusPlan(plan.getUuid());
-                                        mContext.startActivityForResult(new Intent(mContext, PlanningActivity.class), 1);
-                                        mContext.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                                        break;
+
+        if(plan.getStatus().equals("2")) {
+            holder.imgCheck.setVisibility(View.VISIBLE);
+            holder.imgMore.setVisibility(View.GONE);
+        } else {
+            holder.imgMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new BottomSheet.Builder(mContext).title("Pilih Salah Satu").sheet(R.menu.menu_plan)
+                            .listener(new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    switch (which) {
+                                        case R.id.hapus:
+                                            hapusPlan(plan.getUuid());
+                                            mContext.startActivityForResult(new Intent(mContext, PlanningActivity.class), 1);
+                                            mContext.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                            break;
+                                    }
                                 }
-                            }
-                        }).show();
-            }
-        });
+                            }).show();
+                }
+            });
+        }
     }
 
     private void hapusPlan(String uuid) {
