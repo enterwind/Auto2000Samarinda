@@ -22,11 +22,6 @@ android {
     }
 }
 
-
-
-
-
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -41,7 +36,8 @@ dependencies {
     implementation 'com.muddzdev:styleabletoast:2.0.2'
     implementation 'com.karumi:dexter:4.2.0'
     implementation 'com.github.javiersantos:MaterialStyledDialogs:2.1'
-    implementation 'com.getbase:floatingactionbutton:1.10.1'
+    implementation 'com.github.clans:fab:1.6.4'
+    implementation 'com.cocosw:bottomsheet:1.+@aar'
 
     implementation group: 'com.pubnub', name: 'pubnub-gson', version: '4.12.0'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.2'

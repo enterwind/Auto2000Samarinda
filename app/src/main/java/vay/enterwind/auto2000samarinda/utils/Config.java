@@ -10,23 +10,30 @@ public class Config {
     static public final String URL_LOGIN = "http://auto2000.enterwind.com/api/v1/login/";
     static public final String URL_PASSWORD_SAVE = "http://auto2000.enterwind.com/api/v1/password/update/";
     static public final String URL_PROFIL_SAVE = "http://auto2000.enterwind.com/api/v1/profil/update/";
+    static public final String URL_WIDGET = "http://auto2000.enterwind.com/api/v1/widget/";
+
+    static public final String URL_PLAN = "http://auto2000.enterwind.com/api/v1/planning/";
 
     //JSON TAGS
-    public static final String TAG_LINK = "link";
-    public static final String TAG_LABEL = "label";
-    public static final String TAG_TITLE = "title";
-    public static final String TAG_SLUG = "slug";
-    public static final String TAG_THUMBNAIL = "thumbnail";
-    public static final String TAG_IMAGE = "image";
-    public static final String TAG_YOUTUBE_URL = "youtube_url";
-    public static final String TAG_CONTENT = "content";
-    public static final String TAG_DESC = "desc";
-    public static final String TAG_HIT= "hit";
-    public static final String TAG_EMBED = "embed";
-    public static final String TAG_PROGRAM = "program";
-    public static final String TAG_KATEGORI = "kategori";
-    public static final String TAG_OPERATOR = "operator";
-    public static final String TAG_PREVIEW = "preview";
+    public static final String TAG_UUID = "uuid";
+    public static final String TAG_PEGAWAI = "pegawai_id";
+    public static final String TAG_TANGGAL = "tanggal";
+    public static final String TAG_NAMA = "nama";
+    public static final String TAG_ALAMAT = "alamat";
+    public static final String TAG_TELEPON = "telepon";
+    public static final String TAG_LONGITUDE = "longitude";
+    public static final String TAG_LATITUDE = "latitude";
+
+    public static final String TAG_CATATAN = "catatan";
+    public static final String TAG_JENIS = "jenis";
+
+    public static final String TAG_TAKEN_BY = "taken_by";
+    public static final String TAG_TGL_TAKEN_BY = "tgl_taken_by";
+    public static final String TAG_STATUS = "status";
+
     public static final String TAG_CREATED_AT = "created_at";
+    public static final String TAG_UPDATED_AT = "updated_at";
+
+    public static final String TAG_DESC = "desc";
 
 }

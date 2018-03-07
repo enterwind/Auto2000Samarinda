@@ -114,7 +114,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/npk"
+                            android:id="@+id/telepon"
                             android:fontFamily="@font/oswald"
                             android:background="@android:color/transparent"
                             android:inputType="number" />
