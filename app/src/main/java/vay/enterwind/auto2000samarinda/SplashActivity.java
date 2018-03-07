@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import vay.enterwind.auto2000samarinda.module.sales.HomeActivity;
+import vay.enterwind.auto2000samarinda.pubnub.example.*;
 
 public class SplashActivity extends Activity {
 
