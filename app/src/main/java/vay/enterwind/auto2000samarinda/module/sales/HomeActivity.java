@@ -40,8 +40,6 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     @BindView(R.id.refreshLayout) SwipeRefreshLayout swipeRefresh;
 
-    AuthManagement session;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,15 +54,12 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     @SuppressLint("SetTextI18n")
     private void init() {
-        session = new AuthManagement(getApplicationContext());
-        HashMap<String, String> detail = session.getUserDetails();
+        namaLengkap.setText(sessionNama);
+        jabatanTelepon.setText(sessionJabatan + " (" + sessionTelepon + ")");
+        supervisor.setText("Supervisor: " + sessionSupervisor);
+        regional.setText("Regional: " + sessionRegional);
 
-        namaLengkap.setText(detail.get(AuthManagement.KEY_NAMA));
-        jabatanTelepon.setText(detail.get(AuthManagement.KEY_JABATAN) + " (" + detail.get(AuthManagement.KEY_TELEPON) + ")");
-        supervisor.setText("Supervisor: " + detail.get(AuthManagement.KEY_SUPERVISOR));
-        regional.setText("Regional: " + detail.get(AuthManagement.KEY_REGIONAL));
-
-        getServer(detail.get(AuthManagement.KEY_EMAIL));
+        getServer(sessionEmail);
     }
 
     @Override

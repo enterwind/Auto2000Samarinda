@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_transparent">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <RelativeLayout
+                android:id="@+id/relLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/colorPrimary">
+
+                <ImageView
+                    android:id="@+id/imgHeader"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="20dp"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/logo_putih" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Timeline"
+                    android:textColor="@color/putih"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:fontFamily="@font/oswald"
+                    android:layout_margin="20dp"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linLayout1"
+                android:layout_below="@id/relLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="40dp">
+
+                <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/refreshLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:clipToPadding="false"/>
+
+                </android.support.v4.widget.SwipeRefreshLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <!-- Bottom Navigation -->
+    <include layout="@layout/navigation_others" />
+
+</RelativeLayout>

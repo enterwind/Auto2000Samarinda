@@ -11,7 +11,8 @@
             android:layout_height="match_parent"
             android:id="@+id/bottomNav"
             android:background="@drawable/white_grey_border_top"
-            app:menu="@menu/nav_sales">
+            android:fontFamily="@font/oswald"
+            app:menu="@menu/nav_svp">
 
         </com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx>
 

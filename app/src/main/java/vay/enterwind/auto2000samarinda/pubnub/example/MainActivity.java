@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         this.pubNub = initPubNub(this.userName);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("1_Marker"));
+//        tabLayout.addTab(tabLayout.newTab().setText("1_Marker"));
         tabLayout.addTab(tabLayout.newTab().setText("2_Live_Location"));
-        tabLayout.addTab(tabLayout.newTab().setText("3_Flightpath"));
+//        tabLayout.addTab(tabLayout.newTab().setText("3_Flightpath"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

@@ -31,7 +31,7 @@ import vay.enterwind.auto2000samarinda.session.AuthManagement;
 public class ProfilActivity extends BaseActivity {
 
     private static final String TAG = "ProfilActivity";
-    private static final int ACTIVITY_NUM = 3;
+    private static final int ACTIVITY_NUM = 4;
     private Context mContext = ProfilActivity.this;
 
     @BindView(R.id.btnLogout) RelativeLayout btnLogout;

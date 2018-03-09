@@ -1,0 +1,329 @@
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_transparent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <RelativeLayout
+                android:id="@+id/relLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/colorPrimary">
+
+                <ImageView
+                    android:id="@+id/imgHeader"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="20dp"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/logo_putih" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Profil"
+                    android:textColor="@color/putih"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:fontFamily="@font/oswald"
+                    android:layout_margin="20dp"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linLayout1"
+                android:layout_below="@id/relLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-40dp"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:id="@+id/cardView1"
+                    app:cardCornerRadius="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/linLayout1"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/foto"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:src="@drawable/btn_accent"
+                                android:scaleType="centerCrop"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginBottom="15dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:id="@+id/namaLengkap"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/oswald"
+                                    android:text="Noviyanto Rahmadi"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/jabatan"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-5dp"
+                                    android:fontFamily="@font/oswald"
+                                    android:text="Sales Assistant"
+                                    android:textColor="@color/grey"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/telepon"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-5dp"
+                                    android:fontFamily="@font/oswald"
+                                    android:text="0811 5555573"
+                                    android:textColor="@color/grey"
+                                    android:textSize="18sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/putih">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <View android:background="@color/light_transparent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginRight="15dp"
+                                    android:layout_marginEnd="15dp"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="100"
+                                    android:paddingTop="15dp"
+                                    android:paddingBottom="15dp"
+                                    android:id="@+id/listProfil">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="85"
+                                        android:gravity="center_vertical"
+                                        android:layout_marginStart="20dp"
+                                        android:layout_marginLeft="20dp"
+                                        android:text="UBAH PROFIL"
+                                        android:fontFamily="@font/oswald"
+                                        android:textSize="16sp"/>
+
+                                    <RelativeLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="15">
+
+                                        <ImageView
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:background="@drawable/ic_next"
+                                            android:layout_centerInParent="true"
+                                            android:contentDescription="notifikasi"/>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+                                <View android:background="@color/light_transparent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginRight="15dp"
+                                    android:layout_marginEnd="15dp"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="100"
+                                    android:paddingTop="15dp"
+                                    android:paddingBottom="15dp"
+                                    android:id="@+id/listPassword">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="85"
+                                        android:gravity="center_vertical"
+                                        android:layout_marginStart="20dp"
+                                        android:layout_marginLeft="20dp"
+                                        android:text="UBAH PASSWORD"
+                                        android:fontFamily="@font/oswald"
+                                        android:textSize="16sp"/>
+
+                                    <RelativeLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="15">
+
+                                        <ImageView
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:background="@drawable/ic_next"
+                                            android:layout_centerInParent="true"
+                                            android:contentDescription="notifikasi"/>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+                                <View android:background="@color/light_transparent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginRight="15dp"
+                                    android:layout_marginEnd="15dp"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="100"
+                                    android:paddingTop="15dp"
+                                    android:paddingBottom="15dp"
+                                    android:id="@+id/listTentang">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="85"
+                                        android:gravity="center_vertical"
+                                        android:layout_marginStart="20dp"
+                                        android:layout_marginLeft="20dp"
+                                        android:text="TENTANG APLIKASI"
+                                        android:fontFamily="@font/oswald"
+                                        android:textSize="16sp"/>
+
+                                    <RelativeLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="15">
+
+                                        <ImageView
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:background="@drawable/ic_next"
+                                            android:layout_centerInParent="true"
+                                            android:contentDescription="notifikasi"/>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+                                <View android:background="@color/light_transparent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginRight="15dp"
+                                    android:layout_marginEnd="15dp"/>
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/btnLogout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="25dp"
+                            android:background="@color/putih"
+                            android:layout_marginTop="50dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <View android:background="@color/light_transparent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginRight="15dp"
+                                    android:layout_marginEnd="15dp"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="15dp"
+                                    android:gravity="center_vertical"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="SIGN OUT"
+                                    android:fontFamily="@font/oswald"
+                                    android:textAllCaps="true"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/red"
+                                    android:textSize="16sp"/>
+
+                                <View android:background="@color/light_transparent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginRight="15dp"
+                                    android:layout_marginEnd="15dp"/>
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+</merge>

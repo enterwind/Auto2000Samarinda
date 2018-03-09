@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgHeader"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/logo_putih" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/imgHeader"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="30dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/oswald"
+                    android:text="Selamat Datang,"
+                    android:textColor="@color/putih"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/namaLengkap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-5dp"
+                    android:fontFamily="@font/oswald"
+                    android:text="Noviyanto Rahmadi"
+                    android:textColor="@color/putih"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/jabatanTelepon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-5dp"
+                    android:fontFamily="@font/oswald"
+                    android:text="Sales Assistant (08115555573)"
+                    android:textColor="@color/putih"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="70dp"
+                    android:fontFamily="@font/oswald"
+                    android:text="Sales References"
+                    android:textColor="@color/putih"
+                    android:textSize="23sp" />
+
+                <TextView
+                    android:id="@+id/prospekSales"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-10dp"
+                    android:fontFamily="@font/oswald"
+                    android:text="1 Prospek"
+                    android:textColor="@color/putih"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/oswald"
+                    android:text="General Repair References"
+                    android:textColor="@color/putih"
+                    android:textSize="23sp" />
+
+                <TextView
+                    android:id="@+id/prospekGr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-10dp"
+                    android:fontFamily="@font/oswald"
+                    android:text="3 Prospek"
+                    android:textColor="@color/putih"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/oswald"
+                    android:text="Body Painting References"
+                    android:textColor="@color/putih"
+                    android:textSize="23sp"/>
+
+                <TextView
+                    android:id="@+id/prospekBp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-10dp"
+                    android:fontFamily="@font/oswald"
+                    android:text="1 Prospek"
+                    android:textColor="@color/putih"
+                    android:textSize="30sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="70dp"
+            android:src="@drawable/ic_add_putih" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <!-- Bottom Navigation -->
+    <include layout="@layout/navigation_services" />
+
+</RelativeLayout>

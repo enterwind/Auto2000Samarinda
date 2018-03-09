@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "194340518884",
+    "firebase_url": "https://radiant-fire-524.firebaseio.com",
+    "project_id": "radiant-fire-524",
+    "storage_bucket": "radiant-fire-524.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194340518884:android:524b7a14d86e4e87",
+        "android_client_info": {
+          "package_name": "vay.enterwind.auto2000samarinda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194340518884-0rf1v9m268fisdsrnk4fhccf8dqveegk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vay.enterwind.auto2000samarinda",
+            "certificate_hash": "3149f1bbddc04d3add54663a66f63718fe7441b9"
+          }
+        },
+        {
+          "client_id": "194340518884-qcr5rie65ak0isannmpudf10gr2pajma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcH9idBC2LEk9QJQllhtzs9bAXYIBUL-Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194340518884-qcr5rie65ak0isannmpudf10gr2pajma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

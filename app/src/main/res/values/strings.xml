@@ -8,4 +8,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_sales_location">Map</string>
+
+    <string name="notification_add_to_cart_button">Like</string>
+    <string name="group_name">Group 1</string>
+    <string name="notifications_admin_channel_name">Global channel</string>
+    <string name="notifications_admin_channel_description">Notifications sent from the app admin</string>
+
+    <string name="pilih_satu">Pilih Salah Satu</string>
+    <string-array name="pilih_jenis">
+        <item>Sales</item>
+        <item>General Repair</item>
+        <item>Body Painting</item>
+    </string-array>
 </resources>

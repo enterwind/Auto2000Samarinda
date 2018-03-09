@@ -21,6 +21,8 @@ import com.pubnub.api.callbacks.PNCallback;
 import com.pubnub.api.models.consumer.PNPublishResult;
 import com.pubnub.api.models.consumer.PNStatus;
 
+import org.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.Map;
 
@@ -70,6 +72,7 @@ public class LocationPublishTabContentFragment extends Fragment implements OnMap
 
     @Override
     public void onLocationChanged(Location location) {
+
         final Map<String, String> message = getNewLocationMessage(this.userName, location);
 
         this.pubNub.publish().channel(Constants.PUBLISH_CHANNEL_NAME).message(message).async(
@@ -78,7 +81,7 @@ public class LocationPublishTabContentFragment extends Fragment implements OnMap
                     public void onResponse(PNPublishResult result, PNStatus status) {
                         try {
                             if (!status.isError()) {
-                                Log.v(TAG, "publish(" + JsonUtil.asJson(result) + ")");
+                                Log.v(TAG, "publish(" + result + ")");
                             } else {
                                 Log.v(TAG, "publishErr(" + status.toString() + ")");
                             }

@@ -9,8 +9,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <uses-feature android:name="android.hardware.camera"></uses-feature>
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -25,6 +26,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- FCM -->
+        <service android:name=".firebase.MyFirebaseMessagingService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service android:name=".firebase.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <!-- FCM -->
+
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
 
@@ -51,7 +77,24 @@
             android:screenOrientation="portrait" />
         <activity android:name=".pubnub.example.MainActivity" />
         <activity android:name=".module.sales.profil.TentangActivity" />
-        <activity android:name=".module.sales.checkpoint.DetailActivity"></activity>
+        <activity android:name=".module.sales.checkpoint.DetailActivity" />
+        <activity android:name=".module.sales.TimelineActivity" />
+        <activity
+            android:name=".module.supervisor.TrackActivity"
+            android:label="@string/title_activity_sales_location" />
+        <activity android:name=".module.supervisor.HomeActivity" />
+        <activity android:name=".module.others.HomeActivity" />
+        <activity android:name=".module.others.ProfilActivity" />
+        <activity android:name=".module.others.HistoryActivity" />
+        <activity android:name=".module.others.TimelineActivity" />
+        <activity android:name=".module.service.HomeActivity" />
+        <activity android:name=".module.service.HistoryActivity" />
+        <activity android:name=".module.service.ProfilActivity" />
+        <activity android:name=".module.service.TimelineActivity" />
+        <activity android:name=".module.supervisor.ReportActivity" />
+        <activity android:name=".module.supervisor.ProfilActivity" />
+        <activity android:name=".module.supervisor.TimelineActivity" />
+        <activity android:name=".module.others.references.AddReferenceActivity"></activity>
     </application>
 
 </manifest>

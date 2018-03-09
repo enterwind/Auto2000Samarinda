@@ -20,6 +20,12 @@
         android:fontFamily="@font/oswald"/>
 
     <item
+        android:id="@+id/ic_timeline"
+        android:icon="@drawable/ic_timeline"
+        android:title="Timeline"
+        android:fontFamily="@font/oswald"/>
+
+    <item
         android:id="@+id/ic_profil"
         android:icon="@drawable/ic_profil"
         android:title="Profil"

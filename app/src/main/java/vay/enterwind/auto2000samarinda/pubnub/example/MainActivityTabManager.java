@@ -17,25 +17,26 @@ import vay.enterwind.auto2000samarinda.pubnub.example.locationsubscribe.Location
 
 public class MainActivityTabManager extends FragmentStatePagerAdapter {
 
-    private final LocationSubscribeTabContentFragment locationSubscribe;
+//    private final LocationSubscribeTabContentFragment locationSubscribe;
     private final LocationPublishTabContentFragment locationPublish;
-    private final FlightPathsTabContentFragment flightPathsTabContentFragment;
+//    private final FlightPathsTabContentFragment flightPathsTabContentFragment;
 
     private ImmutableList<Fragment> items;
 
     public MainActivityTabManager(FragmentManager fm, int NumOfTabs, PubNub pubNub) {
         super(fm);
 
-        this.locationSubscribe = new LocationSubscribeTabContentFragment();
-        this.locationSubscribe.setPubNub(pubNub);
+//        this.locationSubscribe = new LocationSubscribeTabContentFragment();
+//        this.locationSubscribe.setPubNub(pubNub);
 
         this.locationPublish = new LocationPublishTabContentFragment();
         this.locationPublish.setPubNub(pubNub);
 
-        this.flightPathsTabContentFragment = new FlightPathsTabContentFragment();
-        this.flightPathsTabContentFragment.setPubNub(pubNub);
+//        this.flightPathsTabContentFragment = new FlightPathsTabContentFragment();
+//        this.flightPathsTabContentFragment.setPubNub(pubNub);
 
-        this.items = ImmutableList.of((Fragment) locationSubscribe, (Fragment) locationPublish, (Fragment) flightPathsTabContentFragment);
+//        this.items = ImmutableList.of((Fragment) locationSubscribe, (Fragment) locationPublish, (Fragment) flightPathsTabContentFragment);
+        this.items = ImmutableList.of((Fragment) locationPublish);
     }
 
     @Override

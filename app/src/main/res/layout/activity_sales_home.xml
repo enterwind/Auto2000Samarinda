@@ -151,6 +151,6 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <!-- Bottom Navigation -->
-    <include layout="@layout/bottom_navigation" />
+    <include layout="@layout/navigation_sales" />
 
 </RelativeLayout>

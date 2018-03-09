@@ -7,9 +7,6 @@ import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 
-import vay.enterwind.auto2000samarinda.module.sales.HomeActivity;
-import vay.enterwind.auto2000samarinda.pubnub.example.*;
-
 public class SplashActivity extends Activity {
 
     @Override
@@ -26,7 +23,7 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
         }, 2000);
