@@ -29,6 +29,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.module.sales.ProfilActivity;
 import vay.enterwind.auto2000samarinda.module.sales.profil.UbahPasswordActivity;
@@ -50,7 +51,7 @@ public class AddPlanActivity extends AppCompatActivity {
     @BindView(R.id.longitude) EditText longitude;
     @BindView(R.id.latitude) EditText latitude;
 
-    ProgressDialog progress;
+    SpotsDialog dialog;
     AuthManagement session;
     String email;
 
@@ -59,6 +60,7 @@ public class AddPlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_add_plan);
         ButterKnife.bind(this);
+        dialog = new SpotsDialog(this);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setupSession();
@@ -79,22 +81,22 @@ public class AddPlanActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btnSimpan) void onSimpan() {
-        progress = ProgressDialog.show(AddPlanActivity.this, "Loading...", "Tunggu Sebentar");
+        dialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.URL_PLAN + email + "/add",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         if(response.equals("sukses")) {
                             StyleableToast.makeText(AddPlanActivity.this, "Perencanaan Berhasil Dibuat!", R.style.ToastSukses).show();
+                            dialog.dismiss();
 
                             Intent intent = new Intent();
                             setResult(RESULT_OK, intent);
                             finish();
 
-                            progress.dismiss();
                         } else {
                             StyleableToast.makeText(AddPlanActivity.this, "Maaf, terjadi gangguan koneksi atau ada masalah pada server kami.", R.style.ToastGagal).show();
-                            progress.dismiss();
+                            dialog.dismiss();
                         }
                     }
                 },
@@ -102,7 +104,7 @@ public class AddPlanActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         StyleableToast.makeText(AddPlanActivity.this, "Koneksi kurang stabil, pastikan Anda terkoneksi dengan internet.", R.style.ToastGagal).show();
-                        progress.dismiss();
+                        dialog.dismiss();
                     }
                 }){
             @Override

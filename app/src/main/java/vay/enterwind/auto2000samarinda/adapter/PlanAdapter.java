@@ -47,7 +47,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.MyViewHolder> 
         @BindView(R.id.txtNama) TextView txtNama;
         @BindView(R.id.txtAlamat) TextView txtAlamat;
         @BindView(R.id.imgMore) ImageView imgMore;
-        @BindView(R.id.imgCheck) ImageView imgCheck;
+        @BindView(R.id.imgCheck) TextView imgCheck;
 
         MyViewHolder(View view) {
             super(view);

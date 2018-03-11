@@ -21,4 +21,6 @@
         <item>General Repair</item>
         <item>Body Painting</item>
     </string-array>
+    <string name="title_activity_full_map">Sales Tracking</string>
+    <string name="title_activity_sales_map">Sales Map</string>
 </resources>

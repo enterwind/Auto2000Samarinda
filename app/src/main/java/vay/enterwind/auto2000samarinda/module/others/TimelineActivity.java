@@ -1,6 +1,7 @@
 package vay.enterwind.auto2000samarinda.module.others;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -25,12 +26,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 import vay.enterwind.auto2000samarinda.BaseActivity;
 import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.adapter.TimelineAdapter;
 import vay.enterwind.auto2000samarinda.models.Orientation;
 import vay.enterwind.auto2000samarinda.models.Timeline;
 import vay.enterwind.auto2000samarinda.models.Type;
+import vay.enterwind.auto2000samarinda.module.others.references.AddReferenceActivity;
 import vay.enterwind.auto2000samarinda.utils.Config;
 
 public class TimelineActivity extends BaseActivity implements TimelineAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
@@ -48,13 +52,15 @@ public class TimelineActivity extends BaseActivity implements TimelineAdapter.On
     @BindView(R.id.refreshLayout) SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
 
+    SpotsDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_others_timeline);
         ButterKnife.bind(this);
+        dialog = new SpotsDialog(this);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
 
@@ -89,6 +95,7 @@ public class TimelineActivity extends BaseActivity implements TimelineAdapter.On
     public void onStart() {
         super.onStart();
         requestCount = 1;
+        dialog.show();
         getData();
         mTimeLineAdapter.setMore(true);
     }
@@ -108,6 +115,7 @@ public class TimelineActivity extends BaseActivity implements TimelineAdapter.On
 
     private void getData() {
         requestQueue.add(getDataFromServer(requestCount));
+        mTimeLineAdapter.dismissLoading();
         requestCount++;
     }
 
@@ -116,25 +124,21 @@ public class TimelineActivity extends BaseActivity implements TimelineAdapter.On
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d(TAG, "onResponse: "+response);
                         parseData(response);
+                        dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         mTimeLineAdapter.dismissLoading();
+                        dialog.dismiss();
                     }
                 });
     }
 
     private void parseData(JSONArray array) {
         mDataList.clear();
-
-        if(array.length() == 0) {
-            // rlKosong.setVisibility(View.VISIBLE);
-        }
-
         for (int i = 0; i < array.length(); i++) {
             JSONObject json;
             try {
@@ -142,7 +146,6 @@ public class TimelineActivity extends BaseActivity implements TimelineAdapter.On
 
                 Type type = null;
 
-                // Kondisi Jenis Prospek
                 if(json.getString(Config.TAG_STATUS).equals("1")) {
                     type = Type.NONE;
                 }
@@ -163,14 +166,13 @@ public class TimelineActivity extends BaseActivity implements TimelineAdapter.On
             }
         }
 
-        mTimeLineAdapter.addAll(mDataList);
-        mTimeLineAdapter.dismissLoading();
         mTimeLineAdapter.addItemMore(mDataList);
-        mTimeLineAdapter.setMore(true);
+        mTimeLineAdapter.dismissLoading();
     }
 
     @Override
     public void onLoadMore() {
         getData();
     }
+
 }

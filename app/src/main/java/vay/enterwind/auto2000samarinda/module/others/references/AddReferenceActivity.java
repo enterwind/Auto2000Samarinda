@@ -28,6 +28,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.module.sales.plans.AddPlanActivity;
 import vay.enterwind.auto2000samarinda.session.AuthManagement;
@@ -46,7 +47,7 @@ public class AddReferenceActivity extends AppCompatActivity {
     @BindView(R.id.txtCatatan) EditText txtCatatan;
     @BindView(R.id.txtJenis) Spinner txtJenis;
 
-    ProgressDialog progress;
+    SpotsDialog dialog;
     AuthManagement session;
     String email;
 
@@ -55,6 +56,7 @@ public class AddReferenceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_reference);
         ButterKnife.bind(this);
+        dialog = new SpotsDialog(this);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setupSession();
@@ -71,22 +73,20 @@ public class AddReferenceActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btnSimpan) void onSimpan() {
-        progress = ProgressDialog.show(mContext, "Loading...", "Tunggu Sebentar");
+        dialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.URL_PROSPEK + email + "/send",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         if(response.equals("sukses")) {
                             StyleableToast.makeText(mContext, "Referensi Berhasil Terkirim!", R.style.ToastSukses).show();
-
+                            dialog.dismiss();
                             Intent intent = new Intent();
                             setResult(RESULT_OK, intent);
                             finish();
-
-                            progress.dismiss();
                         } else {
                             StyleableToast.makeText(mContext, "Maaf, terjadi gangguan koneksi atau ada masalah pada server kami.", R.style.ToastGagal).show();
-                            progress.dismiss();
+                            dialog.dismiss();
                         }
                     }
                 },
@@ -94,7 +94,7 @@ public class AddReferenceActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         StyleableToast.makeText(mContext, "Koneksi kurang stabil, pastikan Anda terkoneksi dengan internet.", R.style.ToastGagal).show();
-                        progress.dismiss();
+                        dialog.dismiss();
                     }
                 }){
             @Override

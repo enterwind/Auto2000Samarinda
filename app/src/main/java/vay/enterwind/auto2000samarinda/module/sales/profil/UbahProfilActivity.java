@@ -24,6 +24,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.session.AuthManagement;
 import vay.enterwind.auto2000samarinda.utils.Config;
@@ -39,7 +40,7 @@ public class UbahProfilActivity extends AppCompatActivity {
     @BindView(R.id.telepon) TextView telepon;
     @BindView(R.id.alamat) TextView alamat;
 
-    ProgressDialog progress;
+    SpotsDialog dialog;
     AuthManagement session;
     String email;
 
@@ -48,6 +49,7 @@ public class UbahProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_profil_akun);
         ButterKnife.bind(this);
+        dialog = new SpotsDialog(this);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -70,7 +72,7 @@ public class UbahProfilActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btnSimpan) void onSimpanClick() {
-        progress = ProgressDialog.show(UbahProfilActivity.this, "Loading...", "Tunggu Sebentar");
+        dialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.URL_PROFIL_SAVE + email,
                 new Response.Listener<String>() {
                     @Override
@@ -83,11 +85,10 @@ public class UbahProfilActivity extends AppCompatActivity {
                                     alamat.getText().toString().trim());
 
                             StyleableToast.makeText(UbahProfilActivity.this, "Profil Anda berhasil diubah!", R.style.ToastSukses).show();
-                            progress.dismiss();
+                            dialog.dismiss();
                         } else {
                             StyleableToast.makeText(UbahProfilActivity.this, "Maaf, terjadi gangguan koneksi atau ada masalah pada server kami.", R.style.ToastGagal).show();
-                            Log.d(TAG, "onResponse: " + response);
-                            progress.dismiss();
+                            dialog.dismiss();
                         }
                     }
                 },
@@ -95,7 +96,7 @@ public class UbahProfilActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         StyleableToast.makeText(UbahProfilActivity.this, "Koneksi kurang stabil, pastikan Anda terkoneksi dengan internet.", R.style.ToastGagal).show();
-                        progress.dismiss();
+                        dialog.dismiss();
                     }
                 }){
             @Override

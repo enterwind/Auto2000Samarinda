@@ -10,6 +10,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Location;
@@ -19,6 +20,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -30,6 +32,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.common.collect.ImmutableMap;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -53,6 +56,8 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.ButterKnife;
+import vay.enterwind.auto2000samarinda.firebase.NotificationUtils;
+import vay.enterwind.auto2000samarinda.module.sales.RebutanActivity;
 import vay.enterwind.auto2000samarinda.pubnub.Constants;
 import vay.enterwind.auto2000samarinda.pubnub.example.*;
 import vay.enterwind.auto2000samarinda.pubnub.example.locationpublish.LocationHelper;
@@ -61,6 +66,7 @@ import vay.enterwind.auto2000samarinda.pubnub.example.locationpublish.LocationPu
 import vay.enterwind.auto2000samarinda.pubnub.example.util.JsonUtil;
 import vay.enterwind.auto2000samarinda.session.AuthManagement;
 import vay.enterwind.auto2000samarinda.utils.BottomNavigationViewHelper;
+import vay.enterwind.auto2000samarinda.utils.Config;
 
 /**
  * Created by novay on 04/03/18.
@@ -84,6 +90,8 @@ public class BaseActivity extends AppCompatActivity implements LocationListener 
 
     public String refreshedToken;
 
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+
     private static ImmutableMap<String, String> getNewLocationMessage(String userName, Location location) {
         return ImmutableMap.<String, String>of("who", userName, "lat", Double.toString(location.getLatitude()), "lng", Double.toString(location.getLongitude()));
     }
@@ -105,31 +113,46 @@ public class BaseActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void notificationInit() {
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//        String channelId = "1";
+//        String channel2 = "2";
+//
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//            NotificationChannel notificationChannel = new NotificationChannel(channelId,
+//                    "Channel 1",NotificationManager.IMPORTANCE_HIGH);
+//
+//            notificationChannel.setDescription("This is BNT");
+//            notificationChannel.setLightColor(Color.RED);
+//            notificationChannel.enableVibration(true);
+//            notificationChannel.setShowBadge(true);
+//            notificationManager.createNotificationChannel(notificationChannel);
+//
+//            NotificationChannel notificationChannel2 = new NotificationChannel(channel2,
+//                    "Channel 2", NotificationManager.IMPORTANCE_MIN);
+//
+//            notificationChannel.setDescription("This is bTV");
+//            notificationChannel.setLightColor(Color.RED);
+//            notificationChannel.enableVibration(true);
+//            notificationChannel.setShowBadge(true);
+//            notificationManager.createNotificationChannel(notificationChannel2);
+//
+//        }
 
-        String channelId = "1";
-        String channel2 = "2";
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(channelId,
-                    "Channel 1",NotificationManager.IMPORTANCE_HIGH);
-
-            notificationChannel.setDescription("This is BNT");
-            notificationChannel.setLightColor(Color.RED);
-            notificationChannel.enableVibration(true);
-            notificationChannel.setShowBadge(true);
-            notificationManager.createNotificationChannel(notificationChannel);
-
-            NotificationChannel notificationChannel2 = new NotificationChannel(channel2,
-                    "Channel 2", NotificationManager.IMPORTANCE_MIN);
-
-            notificationChannel.setDescription("This is bTV");
-            notificationChannel.setLightColor(Color.RED);
-            notificationChannel.enableVibration(true);
-            notificationChannel.setShowBadge(true);
-            notificationManager.createNotificationChannel(notificationChannel2);
-
-        }
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
+                    FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+                } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
+                    String message = intent.getStringExtra("imageUrl");
+                    Log.d(TAG, "onReceive: "+message);
+                    Intent i = new Intent(getApplicationContext(), RebutanActivity.class);
+                    i.putExtra("ID", message);
+                    startActivity(i);
+                }
+            }
+        };
     }
 
     private void pubnubInit() {
@@ -139,8 +162,7 @@ public class BaseActivity extends AppCompatActivity implements LocationListener 
             startActivity(toLogin);
         }
 
-//        this.userName = mSharedPrefs.getString(Constants.DATASTREAM_UUID, sessionEmail);
-        this.userName = "kholiz.auto2000@gmail.com";
+        this.userName = mSharedPrefs.getString(Constants.DATASTREAM_UUID, sessionEmail);
         this.pubNub = initPubNub(this.userName);
         this.pubNub.subscribe().channels(Arrays.asList(Constants.PUBLISH_CHANNEL_NAME)).execute();
 
@@ -210,15 +232,6 @@ public class BaseActivity extends AppCompatActivity implements LocationListener 
         menuItem.setChecked(true);
     }
 
-    public static void staticBottomNavigationView(Context context, final Activity callingActivity,
-                                                  int ACTIVITY_NUM, BottomNavigationViewEx bottomNavigationViewEx){
-        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
-        BottomNavigationViewHelper.enableNavigation(context, callingActivity, bottomNavigationViewEx);
-        Menu menu = bottomNavigationViewEx.getMenu();
-        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-        menuItem.setChecked(true);
-    }
-
     public void setupSession(Context context) {
         session = new AuthManagement(context);
         session.checkLogin();
@@ -249,10 +262,6 @@ public class BaseActivity extends AppCompatActivity implements LocationListener 
         return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 
-    public void showMessage(String message){
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
@@ -278,6 +287,21 @@ public class BaseActivity extends AppCompatActivity implements LocationListener 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        isAppRunning = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.REGISTRATION_COMPLETE));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.PUSH_NOTIFICATION));
+        NotificationUtils.clearNotifications(getApplicationContext());
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
     }
 }

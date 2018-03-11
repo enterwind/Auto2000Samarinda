@@ -26,6 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dmax.dialog.SpotsDialog;
 import vay.enterwind.auto2000samarinda.BaseActivity;
 import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.adapter.CheckpointAdapter;
@@ -44,14 +45,15 @@ public class CheckpointActivity extends BaseActivity {
     private List<Plan> planList = new ArrayList<>();
     private CheckpointAdapter mAdapter;
 
-    ProgressDialog progress;
+    SpotsDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_checkpoint);
         ButterKnife.bind(this);
-        progress = ProgressDialog.show(mContext, "Loading...", "Tunggu Sebentar");
+        dialog = new SpotsDialog(this);
+        dialog.show();
 
         init();
 
@@ -99,13 +101,13 @@ public class CheckpointActivity extends BaseActivity {
                             }
                         }
                         mAdapter.notifyDataSetChanged();
-                        progress.dismiss();
+                        dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        progress.dismiss();
+                        dialog.dismiss();
                     }
                 }
         );

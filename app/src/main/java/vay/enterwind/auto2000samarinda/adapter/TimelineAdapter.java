@@ -127,8 +127,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        // return itemList.size();
-        return (itemList!=null ? itemList.size() : 0);
+        return itemList.size();
+//        return (itemList!=null ? itemList.size() : 0);
     }
 
     static class TimelineViewHolder extends RecyclerView.ViewHolder {

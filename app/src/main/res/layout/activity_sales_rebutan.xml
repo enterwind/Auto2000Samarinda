@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splashscreen"
+    tools:context="vay.enterwind.auto2000samarinda.module.sales.RebutanActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/map"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="1dp" />
+
+    <TextView
+        android:id="@+id/teks1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/map"
+        android:text="Prospek Masuk"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        android:fontFamily="@font/oswald"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/txtNama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/teks1"
+        android:text=""
+        android:textSize="23sp"
+        android:textColor="@color/hitam"
+        android:fontFamily="@font/oswald"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/txtAlamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtNama"
+        android:text=""
+        android:textSize="16sp"
+        android:textColor="@color/hitam"
+        android:fontFamily="@font/oswald"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/txtTelepon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtAlamat"
+        android:text=""
+        android:fontFamily="@font/oswald"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:id="@+id/tombol"
+        android:layout_below="@id/txtTelepon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:padding="20dp">
+
+        <Button
+            android:id="@+id/btnTerima"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="5"
+            android:text="Terima"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/putih"
+            android:fontFamily="@font/oswald"
+            android:background="@color/green"/>
+
+        <Button
+            android:id="@+id/btnTolak"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="5"
+            android:text="Tolak"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/putih"
+            android:fontFamily="@font/oswald"
+            android:background="@color/red"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtPengirim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tombol"
+        android:text=""
+        android:fontFamily="@font/oswald"
+        android:textAlignment="center" />
+
+</RelativeLayout>

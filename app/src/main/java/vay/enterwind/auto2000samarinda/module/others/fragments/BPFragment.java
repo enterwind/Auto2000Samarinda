@@ -32,6 +32,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dmax.dialog.SpotsDialog;
 import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.adapter.ReferenceAdapter;
 import vay.enterwind.auto2000samarinda.models.Reference;
@@ -50,7 +51,7 @@ public class BPFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
     @BindView(R.id.kosong)
     CardView kosong;
 
-    ProgressDialog progress;
+    SpotsDialog dialog;
     public AuthManagement session;
     String sessionEmail;
 
@@ -58,7 +59,8 @@ public class BPFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bp, container, false);
         ButterKnife.bind(this, view);
-        progress = ProgressDialog.show(getContext(), "Loading...", "Tunggu Sebentar");
+        dialog = new SpotsDialog(getContext());
+        dialog.show();
 
         initSession();
         init();
@@ -122,14 +124,14 @@ public class BPFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
                             }
                         }
                         mAdapter.notifyDataSetChanged();
-                        progress.dismiss();
+                        dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, "onErrorResponse: "+error);
-                        progress.dismiss();
+                        dialog.dismiss();
                     }
                 }
         );

@@ -22,11 +22,15 @@ public class Config {
     static public final String URL_PROSPEK = "http://auto2000.enterwind.com/api/v1/prospek/";
     static public final String URL_TIMELINE = "http://auto2000.enterwind.com/api/v1/timeline?page=";
 
+    static public final String URL_REBUTAN = "http://auto2000.enterwind.com/api/v1/rebutan/";
+
+    static public final String URL_SALES = "http://auto2000.enterwind.com/api/v1/sales/";
+
 
     //JSON TAGS
     public static final String TAG_UUID = "uuid";
     public static final String TAG_PEGAWAI = "pegawai_id";
-    public static final String TAG_TANGGAL = "tanggal";
+    public static final String TAG_EMAIL = "email";
     public static final String TAG_NAMA = "nama";
     public static final String TAG_ALAMAT = "alamat";
     public static final String TAG_TELEPON = "telepon";
@@ -37,15 +41,28 @@ public class Config {
     public static final String TAG_JENIS = "jenis";
 
     public static final String TAG_TAKEN_BY = "taken_by";
-    public static final String TAG_TGL_TAKEN_BY = "tgl_taken_by";
+    public static final String TAG_FOTO = "foto";
     public static final String TAG_STATUS = "status";
     public static final String TAG_PESAN = "pesan";
 
     public static final String TAG_CREATED_AT = "created_at";
+
+    public static final String TAG_TGL_TAKEN_BY = "tgl_taken_by";
+    public static final String TAG_TANGGAL = "tanggal";
     public static final String TAG_UPDATED_AT = "updated_at";
     public static final String TAG_DESC = "desc";
-
     public static final String TAG_OLEH = "oleh";
     public static final String TAG_KEPADA = "kepada";
+
+    // Notifikasi
+    // global topic to receive app wide push notifications
+    public static final String TOPIC_GLOBAL = "global";
+    // broadcast receiver intent filters
+    public static final String REGISTRATION_COMPLETE = "registrationComplete";
+    public static final String PUSH_NOTIFICATION = "pushNotification";
+    // id to handle the notification in the notification tray
+    public static final int NOTIFICATION_ID = 100;
+    public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
+    public static final String SHARED_PREF = "ah_firebase";
 
 }

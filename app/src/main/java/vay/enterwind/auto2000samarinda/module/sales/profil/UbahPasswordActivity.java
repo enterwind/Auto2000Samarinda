@@ -1,6 +1,8 @@
 package vay.enterwind.auto2000samarinda.module.sales.profil;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -21,6 +23,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.session.AuthManagement;
 import vay.enterwind.auto2000samarinda.utils.Config;
@@ -28,14 +31,13 @@ import vay.enterwind.auto2000samarinda.utils.Config;
 public class UbahPasswordActivity extends AppCompatActivity {
 
     @BindView(R.id.btnBack) ImageView btnBack;
-
     @BindView(R.id.passwordLama) EditText passwordLama;
     @BindView(R.id.passwordBaru) EditText passwordBaru;
     @BindView(R.id.ulangiPassword) EditText ulangiPassword;
 
     @BindView(R.id.btnSimpan) Button btnSimpan;
 
-    ProgressDialog progress;
+    SpotsDialog dialog;
     AuthManagement session;
     String email, password;
 
@@ -44,6 +46,7 @@ public class UbahPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_profil_password);
         ButterKnife.bind(this);
+        dialog = new SpotsDialog(this);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -62,7 +65,7 @@ public class UbahPasswordActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btnSimpan) void onSimpanClick() {
-        progress = ProgressDialog.show(UbahPasswordActivity.this, "Loading...", "Tunggu Sebentar");
+        dialog.show();
         if(validasi()) {
             final String baru = passwordBaru.getText().toString().trim();
             RequestQueue requestQueue = Volley.newRequestQueue(UbahPasswordActivity.this);
@@ -75,17 +78,17 @@ public class UbahPasswordActivity extends AppCompatActivity {
                             if(response.equals("sukses")) {
                                 session.updatePassword(baru);
                                 StyleableToast.makeText(UbahPasswordActivity.this, "Password berhasil diubah!", R.style.ToastSukses).show();
-                                progress.dismiss();
+                                dialog.dismiss();
                             } else {
                                 StyleableToast.makeText(UbahPasswordActivity.this, "Maaf, terjadi gangguan koneksi atau ada masalah pada server kami.", R.style.ToastGagal).show();
-                                progress.dismiss();
+                                dialog.dismiss();
                             }
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     StyleableToast.makeText(UbahPasswordActivity.this, "Koneksi kurang stabil, pastikan Anda terkoneksi dengan internet.", R.style.ToastGagal).show();
-                    progress.dismiss();
+                    dialog.dismiss();
                 }
             });
             requestQueue.add(stringRequest);
@@ -98,17 +101,17 @@ public class UbahPasswordActivity extends AppCompatActivity {
                 passwordBaru.getText().toString().trim().equals("") ||
                 ulangiPassword.getText().toString().trim().equals("")) {
             StyleableToast.makeText(this, "Pastikan semua inputan telah terisi", R.style.ToastGagal).show();
-            progress.dismiss();
+            dialog.dismiss();
             valid = false;
         } else {
             if(!passwordLama.getText().toString().trim().equals(password)) {
                 StyleableToast.makeText(this, "Password lama Anda tidak valid", R.style.ToastGagal).show();
-                progress.dismiss();
+                dialog.dismiss();
                 valid = false;
             }
             if(!passwordBaru.getText().toString().trim().equals(ulangiPassword.getText().toString().trim())) {
                 StyleableToast.makeText(this, "Password dan Ulangi Password harus sama", R.style.ToastGagal).show();
-                progress.dismiss();
+                dialog.dismiss();
                 valid = false;
             }
         }

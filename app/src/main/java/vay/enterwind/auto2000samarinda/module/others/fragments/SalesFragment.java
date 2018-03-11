@@ -34,6 +34,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dmax.dialog.SpotsDialog;
 import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.adapter.CheckpointAdapter;
 import vay.enterwind.auto2000samarinda.adapter.ReferenceAdapter;
@@ -53,7 +54,7 @@ public class SalesFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     @BindView(R.id.kosong) CardView kosong;
 
-    ProgressDialog progress;
+    SpotsDialog dialog;
     public AuthManagement session;
     String sessionEmail;
 
@@ -61,7 +62,8 @@ public class SalesFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sales, container, false);
         ButterKnife.bind(this, view);
-        progress = ProgressDialog.show(getContext(), "Loading...", "Tunggu Sebentar");
+        dialog = new SpotsDialog(getContext());
+        dialog.show();
 
         initSession();
         init();
@@ -108,6 +110,7 @@ public class SalesFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                             JSONObject obj;
                             try {
                                 obj = response.getJSONObject(i);
+
                                 Reference reference = new Reference(
                                         obj.getString(Config.TAG_UUID),
                                         obj.getString(Config.TAG_NAMA),
@@ -125,14 +128,14 @@ public class SalesFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                             }
                         }
                         mAdapter.notifyDataSetChanged();
-                        progress.dismiss();
+                        dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, "onErrorResponse: "+error);
-                        progress.dismiss();
+                        dialog.dismiss();
                     }
                 }
         );

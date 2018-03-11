@@ -5,48 +5,145 @@
     android:layout_height="match_parent"
     android:background="@color/light_transparent">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/light_transparent">
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
 
         <RelativeLayout
+            android:id="@+id/relLayout1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp">
+            android:layout_height="80dp"
+            android:background="@color/colorPrimary">
 
-            <RelativeLayout
-                android:id="@+id/relLayout1"
+            <ImageView
+                android:id="@+id/imgHeader"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/logo_putih" />
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@color/colorPrimary">
-
-                <ImageView
-                    android:id="@+id/imgHeader"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="20dp"
-                    android:paddingRight="10dp"
-                    android:src="@drawable/logo_putih" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Home"
-                    android:textColor="@color/putih"
-                    android:textStyle="bold"
-                    android:textSize="25sp"
-                    android:fontFamily="@font/oswald"
-                    android:layout_margin="20dp"/>
-
-            </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textColor="@color/putih"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:fontFamily="@font/oswald"
+                android:layout_margin="20dp"/>
 
         </RelativeLayout>
 
-    </ScrollView>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/relLayout1"
+            android:background="@drawable/splashscreen"
+            android:layout_marginBottom="-20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="30dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/oswald"
+                        android:text="Selamat Datang,"
+                        android:textColor="@color/black_semi_transparent"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/namaLengkap"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-5dp"
+                        android:fontFamily="@font/oswald"
+                        android:text="Noviyanto Rahmadi"
+                        android:textColor="@color/black_semi_transparent"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/jabatanTelepon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/oswald"
+                        android:text="Sales Assistant (08115555573)"
+                        android:textColor="@color/black_semi_transparent"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/regional"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/oswald"
+                        android:text="Regional: Samarinda"
+                        android:textColor="@color/black_semi_transparent"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/oswald"
+                        android:text="Sales Online"
+                        android:textColor="@color/black_semi_transparent"
+                        android:textSize="23sp" />
+
+                    <TextView
+                        android:id="@+id/onlineSales"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-10dp"
+                        android:fontFamily="@font/oswald"
+                        android:text="7 Sales"
+                        android:textColor="@color/black_semi_transparent"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/oswald"
+                        android:text="Sales Offline"
+                        android:textColor="@color/black_semi_transparent"
+                        android:textSize="23sp" />
+
+                    <TextView
+                        android:id="@+id/offlineSales"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-10dp"
+                        android:fontFamily="@font/oswald"
+                        android:text="3 Sales"
+                        android:textColor="@color/black_semi_transparent"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
 
     <!-- Bottom Navigation -->
     <include layout="@layout/navigation_svp" />

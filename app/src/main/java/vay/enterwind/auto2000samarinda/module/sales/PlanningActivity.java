@@ -32,6 +32,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 import vay.enterwind.auto2000samarinda.BaseActivity;
 import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.adapter.PlanAdapter;
@@ -54,14 +55,15 @@ public class PlanningActivity extends BaseActivity {
     private List<Plan> planList = new ArrayList<>();
     private PlanAdapter mAdapter;
 
-    ProgressDialog progress;
+    SpotsDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_planning);
         ButterKnife.bind(this);
-        progress = ProgressDialog.show(PlanningActivity.this, "Loading...", "Tunggu Sebentar");
+        dialog = new SpotsDialog(this);
+        dialog.show();
 
         init();
 
@@ -109,13 +111,13 @@ public class PlanningActivity extends BaseActivity {
                             }
                         }
                         mAdapter.notifyDataSetChanged();
-                        progress.dismiss();
+                        dialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        progress.dismiss();
+                        dialog.dismiss();
                     }
                 }
         );
@@ -132,6 +134,7 @@ public class PlanningActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if(resultCode == RESULT_OK) {
+                dialog.show();
                 init();
             }
         }

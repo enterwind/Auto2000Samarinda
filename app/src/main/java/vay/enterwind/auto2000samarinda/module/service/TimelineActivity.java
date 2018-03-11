@@ -159,7 +159,7 @@ public class TimelineActivity extends BaseActivity  implements TimelineAdapter.O
             }
         }
 
-        mTimeLineAdapter.addAll(mDataList);
+        //mTimeLineAdapter.addAll(mDataList);
         mTimeLineAdapter.dismissLoading();
         mTimeLineAdapter.addItemMore(mDataList);
         mTimeLineAdapter.setMore(true);

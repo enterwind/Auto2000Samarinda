@@ -35,44 +35,37 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.utils.Config;
 
 public class DetailActivity extends AppCompatActivity {
     private static final String TAG = "DetailActivity";
 
-    @BindView(R.id.btnBack)
-    ImageView btnBack;
-    @BindView(R.id.btnSimpan)
-    Button btnSimpan;
-    @BindView(R.id.judulNama)
-    TextView judulNama;
+    @BindView(R.id.btnBack) ImageView btnBack;
+    @BindView(R.id.btnSimpan) Button btnSimpan;
+    @BindView(R.id.judulNama) TextView judulNama;
 
-    @BindView(R.id.txtNama)
-    TextView txtNama;
-    @BindView(R.id.txtTelepon)
-    TextView txtTelepon;
-    @BindView(R.id.txtAlamat)
-    TextView txtAlamat;
+    @BindView(R.id.txtNama) TextView txtNama;
+    @BindView(R.id.txtTelepon) TextView txtTelepon;
+    @BindView(R.id.txtAlamat) TextView txtAlamat;
 
-    @BindView(R.id.foto1)
-    ImageView foto1;
-    @BindView(R.id.foto2)
-    ImageView foto2;
-    @BindView(R.id.foto3)
-    ImageView foto3;
+    @BindView(R.id.foto1) ImageView foto1;
+    @BindView(R.id.foto2) ImageView foto2;
+    @BindView(R.id.foto3) ImageView foto3;
 
     String uuid, nama, telepon, alamat;
     Double longitude, latitude;
     boolean harus1, harus2, harus3;
 
-    ProgressDialog progress;
+    SpotsDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_checkpoint_detail);
         ButterKnife.bind(this);
+        dialog = new SpotsDialog(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         trackLocation();
@@ -144,12 +137,12 @@ public class DetailActivity extends AppCompatActivity {
         if(harus1 && harus2 && harus3) {
             parseToServer();
         } else {
-            Toast.makeText(this, "Anda harus melengkapi minimal 3 foto yang diminta.", Toast.LENGTH_SHORT).show();
+            StyleableToast.makeText(DetailActivity.this, "Anda harus melengkapi minimal 3 foto yang diminta.", R.style.ToastGagal).show();
         }
     }
 
     private void parseToServer() {
-        progress = ProgressDialog.show(this, "Loading...", "Tunggu Sebentar");
+        dialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.URL_CHECKPOINT + uuid + "/send",
                 new Response.Listener<String>() {
@@ -157,15 +150,14 @@ public class DetailActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         if(response.equals("sukses")) {
                             StyleableToast.makeText(DetailActivity.this, "Checkpoint Berhasil Dibuat!", R.style.ToastSukses).show();
+                            dialog.dismiss();
 
                             Intent intent = new Intent();
                             setResult(RESULT_OK, intent);
                             finish();
-
-                            progress.dismiss();
                         } else {
                             StyleableToast.makeText(DetailActivity.this, "Terjadi kesalahan. Coba lagi!", R.style.ToastGagal).show();
-                            progress.dismiss();
+                            dialog.dismiss();
                         }
                     }
                 },
@@ -173,7 +165,7 @@ public class DetailActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         StyleableToast.makeText(DetailActivity.this, "Server Error!", R.style.ToastGagal).show();
-                        progress.dismiss();
+                        dialog.dismiss();
                     }
                 }){
             @Override

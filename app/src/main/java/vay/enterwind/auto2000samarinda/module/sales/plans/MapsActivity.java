@@ -113,8 +113,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        location = locationManagerCt.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
+        location = locationManagerCt != null ? locationManagerCt.getLastKnownLocation(LocationManager.GPS_PROVIDER) : null;
+
+        assert location != null;
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
