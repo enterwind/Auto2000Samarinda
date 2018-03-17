@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
@@ -37,12 +38,13 @@ public class MainActivity extends AppCompatActivity {
 
         this.random = new Random();
         this.userName = mSharedPrefs.getString(Constants.DATASTREAM_UUID, "anonymous_" + random.nextInt(10000));
+
         this.pubNub = initPubNub(this.userName);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-//        tabLayout.addTab(tabLayout.newTab().setText("1_Marker"));
+        tabLayout.addTab(tabLayout.newTab().setText("1_Marker"));
         tabLayout.addTab(tabLayout.newTab().setText("2_Live_Location"));
-//        tabLayout.addTab(tabLayout.newTab().setText("3_Flightpath"));
+        tabLayout.addTab(tabLayout.newTab().setText("3_Flightpath"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

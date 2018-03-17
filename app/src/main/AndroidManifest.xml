@@ -107,7 +107,10 @@
             android:label="@string/title_activity_full_map" />
         <activity
             android:name=".module.supervisor.track.SalesMapActivity"
-            android:label="@string/title_activity_sales_map"></activity>
+            android:label="@string/title_activity_sales_map" />
+        <activity android:name=".pubnub.datastream.LoginActivity" />
+        <activity android:name=".pubnub.datastream.MainActivity" />
+        <activity android:name=".module.sales.plans.FotoActivity"></activity>
     </application>
 
 </manifest>

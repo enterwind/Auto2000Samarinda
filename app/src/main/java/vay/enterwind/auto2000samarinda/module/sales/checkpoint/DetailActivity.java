@@ -13,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -148,6 +149,9 @@ public class DetailActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
+                        Log.d(TAG, "onResponsesss: "+response);
+
                         if(response.equals("sukses")) {
                             StyleableToast.makeText(DetailActivity.this, "Checkpoint Berhasil Dibuat!", R.style.ToastSukses).show();
                             dialog.dismiss();
@@ -164,7 +168,7 @@ public class DetailActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        StyleableToast.makeText(DetailActivity.this, "Server Error!", R.style.ToastGagal).show();
+                        StyleableToast.makeText(DetailActivity.this, "Server Error! " + error, R.style.ToastGagal).show();
                         dialog.dismiss();
                     }
                 }){

@@ -29,6 +29,7 @@ public class LocationSubscribeMapAdapter {
 
     public void locationUpdated(final Map<String, String> newLocation) {
         if (newLocation.containsKey("lat") && newLocation.containsKey("lng")) {
+
             String lat = newLocation.get("lat");
             String lng = newLocation.get("lng");
 

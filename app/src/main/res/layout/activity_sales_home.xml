@@ -101,7 +101,7 @@
                 android:fontFamily="@font/oswald"
                 android:text="7 Planning"
                 android:textColor="@color/putih"
-                android:textSize="30sp"
+                android:textSize="28sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -121,7 +121,7 @@
                 android:fontFamily="@font/oswald"
                 android:text="3 Planning"
                 android:textColor="@color/putih"
-                android:textSize="30sp"
+                android:textSize="28sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -141,7 +141,7 @@
                 android:fontFamily="@font/oswald"
                 android:text="4 Planning"
                 android:textColor="@color/putih"
-                android:textSize="30sp"
+                android:textSize="28sp"
                 android:textStyle="bold"/>
 
         </LinearLayout>
@@ -149,6 +149,40 @@
         </RelativeLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnDisconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="70dp"
+            android:src="@drawable/ic_connect"
+            app:backgroundTint="@color/red"
+            app:borderWidth="0dp"
+            app:elevation="6dp"
+            app:fabSize="normal" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnConnect"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="70dp"
+            android:src="@drawable/ic_off"
+            app:backgroundTint="@color/green"
+            app:borderWidth="0dp"
+            app:elevation="6dp"
+            app:fabSize="normal" />
+
+    </android.support.design.widget.CoordinatorLayout>
 
     <!-- Bottom Navigation -->
     <include layout="@layout/navigation_sales" />

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.models.Plan;
 import vay.enterwind.auto2000samarinda.module.sales.HomeActivity;
 import vay.enterwind.auto2000samarinda.module.sales.PlanningActivity;
+import vay.enterwind.auto2000samarinda.module.sales.plans.DetailActivity;
 import vay.enterwind.auto2000samarinda.utils.Config;
 
 /**
@@ -48,6 +50,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.MyViewHolder> 
         @BindView(R.id.txtAlamat) TextView txtAlamat;
         @BindView(R.id.imgMore) ImageView imgMore;
         @BindView(R.id.imgCheck) TextView imgCheck;
+        @BindView(R.id.item) CardView item;
 
         MyViewHolder(View view) {
             super(view);
@@ -77,6 +80,15 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.MyViewHolder> 
         if(plan.getStatus().equals("2")) {
             holder.imgCheck.setVisibility(View.VISIBLE);
             holder.imgMore.setVisibility(View.GONE);
+            holder.item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(mContext, DetailActivity.class);
+                    i.putExtra("UUID", plan.getUuid());
+                    i.putExtra("NAMA", plan.getNama());
+                    mContext.startActivity(i);
+                }
+            });
         } else {
             holder.imgMore.setOnClickListener(new View.OnClickListener() {
                 @Override

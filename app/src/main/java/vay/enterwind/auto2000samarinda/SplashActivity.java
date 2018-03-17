@@ -12,6 +12,8 @@ import android.view.WindowManager;
 
 import java.util.List;
 
+import vay.enterwind.auto2000samarinda.pubnub.example.*;
+
 public class SplashActivity extends Activity {
 
     @Override

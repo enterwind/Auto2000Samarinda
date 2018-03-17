@@ -27,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
+import com.pubnub.api.PubNub;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
     AuthManagement session;
     ProgressDialog progress;
 
+    private PubNub pubNub;
+
     String fcmId;
 
     @Override
@@ -71,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         session = new AuthManagement(getApplicationContext());
         fcmId = FirebaseInstanceId.getInstance().getToken();
     }
-    
+
     @OnClick(R.id.txtLupa) void onLupa() {
         new PrettyDialog(this)
                 .setIcon(

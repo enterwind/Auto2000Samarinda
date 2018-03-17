@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/versiAplikasi"
-        android:text="Copyright © PT Auto2000 Samarinda"
+        android:text="Copyright © The Enterwind Inc. X D'Canteen"
         android:fontFamily="@font/oswald"
         android:textAlignment="center"
         android:textColor="@color/black_semi_transparent"/>

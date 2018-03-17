@@ -2,6 +2,7 @@ package vay.enterwind.auto2000samarinda.module.supervisor;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -23,12 +24,15 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.pubnub.api.PNConfiguration;
+import com.pubnub.api.PubNub;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,6 +44,7 @@ import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.adapter.TrackAdapter;
 import vay.enterwind.auto2000samarinda.models.Sales;
 import vay.enterwind.auto2000samarinda.module.supervisor.track.FullMapActivity;
+import vay.enterwind.auto2000samarinda.pubnub.Constants;
 import vay.enterwind.auto2000samarinda.utils.Config;
 
 public class TrackActivity extends BaseActivity {
@@ -53,6 +58,7 @@ public class TrackActivity extends BaseActivity {
 
     private List<Sales> salesList = new ArrayList<>();
     private TrackAdapter mAdapter;
+    public PubNub pubNub;
 
     SpotsDialog dialog;
 
@@ -64,14 +70,29 @@ public class TrackActivity extends BaseActivity {
         dialog = new SpotsDialog(this);
         dialog.show();
 
+        pubnubInit();
         init();
 
         setupBottomNavigationView(mContext, ACTIVITY_NUM);
     }
 
+    private void pubnubInit() {
+        this.pubNub = initPubNub();
+        // this.pubNub.subscribe().channels(Arrays.asList(Constants.PUBLISH_CHANNEL_NAME)).withPresence().execute();
+    }
+
+    @NonNull
+    private PubNub initPubNub() {
+        PNConfiguration pnConfiguration = new PNConfiguration();
+        pnConfiguration.setPublishKey(Constants.PUBNUB_PUBLISH_KEY);
+        pnConfiguration.setSubscribeKey(Constants.PUBNUB_SUBSCRIBE_KEY);
+        pnConfiguration.setSecure(true);
+        return new PubNub(pnConfiguration);
+    }
+
     private void init() {
         recyclerView.setAdapter(null);
-        mAdapter = new TrackAdapter(this, salesList);
+        mAdapter = new TrackAdapter(this, salesList, this.pubNub);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

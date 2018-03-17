@@ -18,6 +18,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
@@ -33,6 +34,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.common.collect.ImmutableMap;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.JsonObject;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -43,10 +45,19 @@ import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.callbacks.PNCallback;
+import com.pubnub.api.callbacks.SubscribeCallback;
 import com.pubnub.api.models.consumer.PNPublishResult;
 import com.pubnub.api.models.consumer.PNStatus;
+import com.pubnub.api.models.consumer.presence.PNGetStateResult;
+import com.pubnub.api.models.consumer.presence.PNHereNowChannelData;
+import com.pubnub.api.models.consumer.presence.PNHereNowOccupantData;
+import com.pubnub.api.models.consumer.presence.PNHereNowResult;
+import com.pubnub.api.models.consumer.presence.PNSetStateResult;
+import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
+import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.InetAddress;
@@ -107,38 +118,12 @@ public class BaseActivity extends AppCompatActivity implements LocationListener 
         notificationInit();
         refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
-        if(sessionAkses == "1") {
-            pubnubInit();
+        if(sessionAkses.equals("2")) {
+            // pubnubInit();
         }
     }
 
     private void notificationInit() {
-//        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//
-//        String channelId = "1";
-//        String channel2 = "2";
-//
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-//            NotificationChannel notificationChannel = new NotificationChannel(channelId,
-//                    "Channel 1",NotificationManager.IMPORTANCE_HIGH);
-//
-//            notificationChannel.setDescription("This is BNT");
-//            notificationChannel.setLightColor(Color.RED);
-//            notificationChannel.enableVibration(true);
-//            notificationChannel.setShowBadge(true);
-//            notificationManager.createNotificationChannel(notificationChannel);
-//
-//            NotificationChannel notificationChannel2 = new NotificationChannel(channel2,
-//                    "Channel 2", NotificationManager.IMPORTANCE_MIN);
-//
-//            notificationChannel.setDescription("This is bTV");
-//            notificationChannel.setLightColor(Color.RED);
-//            notificationChannel.enableVibration(true);
-//            notificationChannel.setShowBadge(true);
-//            notificationManager.createNotificationChannel(notificationChannel2);
-//
-//        }
-
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -163,8 +148,9 @@ public class BaseActivity extends AppCompatActivity implements LocationListener 
         }
 
         this.userName = mSharedPrefs.getString(Constants.DATASTREAM_UUID, sessionEmail);
+
         this.pubNub = initPubNub(this.userName);
-        this.pubNub.subscribe().channels(Arrays.asList(Constants.PUBLISH_CHANNEL_NAME)).execute();
+        this.pubNub.subscribe().channels(Arrays.asList(Constants.PUBLISH_CHANNEL_NAME)).withPresence().execute();
 
         this.locationHelper = new LocationHelper(getApplicationContext(), this);
     }
@@ -184,8 +170,26 @@ public class BaseActivity extends AppCompatActivity implements LocationListener 
     public void onLocationChanged(Location location) {
         final Map<String, String> message = getNewLocationMessage(this.userName, location);
 
-        Log.d(TAG, "onLocationChangeds: " + message);
+        JSONObject jso = new JSONObject();
+        try {
+            jso.put("latitude", Double.toString(location.getLatitude()));
+            jso.put("longitude", Double.toString(location.getLongitude()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+        this.pubNub.setPresenceState()
+                .channels(Arrays.asList(Constants.PUBLISH_CHANNEL_NAME))
+                .uuid(sessionEmail)
+                .state(jso)
+                .async(new PNCallback<PNSetStateResult>() {
+                    @Override
+                    public void onResponse(PNSetStateResult result, PNStatus status) {
+                        Log.d(TAG, "onResponses: "+status);
+                    }
+                });
+
+        Log.d(TAG, "onLocationChanged: " + message);
         this.pubNub.publish().channel(Constants.PUBLISH_CHANNEL_NAME).message(message).async(
                 new PNCallback<PNPublishResult>() {
                     @Override

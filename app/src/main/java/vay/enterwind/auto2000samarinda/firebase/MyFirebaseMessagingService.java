@@ -32,6 +32,7 @@ import java.util.Random;
 import vay.enterwind.auto2000samarinda.BaseActivity;
 import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.SplashActivity;
+import vay.enterwind.auto2000samarinda.module.sales.RebutanActivity;
 import vay.enterwind.auto2000samarinda.utils.Config;
 
 /**
@@ -209,9 +210,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             } else {
                 // app is in background, show the notification in notification tray
-                Intent resultIntent = new Intent(getApplicationContext(), SplashActivity.class);
+                Intent resultIntent = new Intent(getApplicationContext(), RebutanActivity.class);
                 resultIntent.putExtra("message", message);
                 resultIntent.putExtra("imageUrl", imageUrl);
+                resultIntent.putExtra("ID", imageUrl);
 
                 // check for image attachment
                 if (TextUtils.isEmpty(imageUrl)) {

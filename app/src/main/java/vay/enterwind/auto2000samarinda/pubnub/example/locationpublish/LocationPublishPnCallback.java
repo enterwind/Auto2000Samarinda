@@ -1,6 +1,7 @@
 package vay.enterwind.auto2000samarinda.pubnub.example.locationpublish;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.pubnub.api.PubNub;
 import com.pubnub.api.callbacks.SubscribeCallback;
@@ -40,10 +41,11 @@ public class LocationPublishPnCallback extends SubscribeCallback {
         }
 
         try {
-            Log.d(TAG, "message: " + message.toString());
+            Log.d(TAG, "messagess: " + message.toString());
 
             Map<String, String> newLocation = JsonUtil.fromJson(message.getMessage().toString(), LinkedHashMap.class);
             locationMapAdapter.locationUpdated(newLocation);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -51,11 +53,22 @@ public class LocationPublishPnCallback extends SubscribeCallback {
 
     @Override
     public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+        Log.d(TAG, "presence: " + presence.getEvent());
+
+
         if (!presence.getChannel().equals(watchChannel)) {
             return;
         }
 
         Log.d(TAG, "presence: " + presence.toString());
+
+        Map<String, String> newLocation = null;
+        try {
+            newLocation = JsonUtil.fromJson(presence.toString(), LinkedHashMap.class);
+            locationMapAdapter.locationUpdated(newLocation);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

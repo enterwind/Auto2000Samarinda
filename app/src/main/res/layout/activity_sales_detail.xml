@@ -1,9 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="vay.enterwind.auto2000samarinda.module.sales.plans.DetailActivity">
+    android:background="@color/putih">
 
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/putih">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <RelativeLayout
+                android:id="@+id/relLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/colorPrimary">
+
+                <ImageView
+                    android:id="@+id/imgHeader"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="20dp"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/logo_putih" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Detail Plan"
+                    android:textColor="@color/putih"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:fontFamily="@font/oswald"
+                    android:layout_margin="20dp"
+                    android:paddingLeft="30dp"/>
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="10dp"
+                    android:src="@drawable/ic_back" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_below="@+id/relLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-40dp"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:id="@+id/cardView1"
+                    app:cardCornerRadius="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="100"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginBottom="7dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="35"
+                                android:text="Nama Lengkap"
+                                android:textAllCaps="true"
+                                android:textColor="@color/grey"
+                                android:fontFamily="@font/oswald"/>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="65"
+                                android:id="@+id/txtNama"
+                                android:text="Noviyanto Rahmadi"
+                                android:fontFamily="@font/oswald"
+                                android:textSize="17sp"
+                                android:background="@android:color/transparent" />
+
+                        </LinearLayout>
+
+                        <View android:background="@color/grey"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="100">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="35"
+                                android:text="Nomor Telepon"
+                                android:textAllCaps="true"
+                                android:textColor="@color/grey"
+                                android:fontFamily="@font/oswald"/>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="65"
+                                android:id="@+id/txtTelepon"
+                                android:text="08115555573"
+                                android:fontFamily="@font/oswald"
+                                android:textSize="17sp"
+                                android:background="@android:color/transparent" />
+
+                        </LinearLayout>
+
+                        <View android:background="@color/grey"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="100"
+                            android:layout_marginBottom="7dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="35"
+                                android:text="Alamat"
+                                android:textAllCaps="true"
+                                android:textColor="@color/grey"
+                                android:fontFamily="@font/oswald"/>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="65"
+                                android:id="@+id/txtAlamat"
+                                android:text="Perumahan . . ."
+                                android:fontFamily="@font/oswald"
+                                android:textSize="17sp"
+                                android:background="@android:color/transparent" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="100"
+                            android:layout_marginBottom="7dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="35"
+                                android:text="Catatan"
+                                android:textAllCaps="true"
+                                android:textColor="@color/grey"
+                                android:fontFamily="@font/oswald"/>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="65"
+                                android:id="@+id/txtCatatan"
+                                android:text="Perumahan . . ."
+                                android:fontFamily="@font/oswald"
+                                android:textSize="17sp"
+                                android:background="@android:color/transparent" />
+
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Foto Laporan"
+                            android:textAllCaps="true"
+                            android:textColor="@color/grey"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/oswald"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="90"
+                            android:layout_marginTop="10dp">
+
+                            <ImageView
+                                android:id="@+id/foto1"
+                                android:layout_width="0dp"
+                                android:layout_height="100dp"
+                                android:layout_weight="30"
+                                android:layout_marginEnd="2dp"
+                                android:layout_marginRight="2dp"
+                                android:scaleType="centerCrop"
+                                android:adjustViewBounds="true"
+                                android:src="@mipmap/ic_launcher"/>
+
+                            <ImageView
+                                android:id="@+id/foto2"
+                                android:layout_width="0dp"
+                                android:layout_height="100dp"
+                                android:layout_weight="30"
+                                android:scaleType="centerCrop"
+                                android:adjustViewBounds="true"
+                                android:src="@mipmap/ic_launcher"/>
+
+                            <ImageView
+                                android:id="@+id/foto3"
+                                android:layout_width="0dp"
+                                android:layout_height="100dp"
+                                android:layout_weight="30"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginStart="2dp"
+                                android:scaleType="centerCrop"
+                                android:adjustViewBounds="true"
+                                android:src="@mipmap/ic_launcher"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Lokasi Map"
+                            android:textAllCaps="true"
+                            android:textColor="@color/grey"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/oswald"/>
+
+                        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/map"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            tools:context=".module.sales.plans.DetailActivity" />
+
+                    </LinearLayout>
+
+
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+    </ScrollView>
+
+</RelativeLayout>

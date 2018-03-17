@@ -102,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
                         android:fontFamily="@font/oswald"
-                        android:text="Sales Online"
+                        android:text=""
                         android:textColor="@color/black_semi_transparent"
                         android:textSize="23sp" />
 
@@ -112,7 +112,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-10dp"
                         android:fontFamily="@font/oswald"
-                        android:text="7 Sales"
+                        android:text=""
                         android:textColor="@color/black_semi_transparent"
                         android:textSize="30sp"
                         android:textStyle="bold" />
@@ -122,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/oswald"
-                        android:text="Sales Offline"
+                        android:text=""
                         android:textColor="@color/black_semi_transparent"
                         android:textSize="23sp" />
 
@@ -132,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-10dp"
                         android:fontFamily="@font/oswald"
-                        android:text="3 Sales"
+                        android:text=""
                         android:textColor="@color/black_semi_transparent"
                         android:textSize="30sp"
                         android:textStyle="bold" />
