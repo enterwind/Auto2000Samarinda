@@ -179,6 +179,7 @@ public class DetailActivity extends AppCompatActivity {
                     JSONArray photos = response.getJSONArray("foto");
                     foto = photos.length();
 
+
                     for (int i = 0; i < photos.length(); i++) {
                         JSONObject obj = photos.getJSONObject(i);
                         if(i == 0) {
@@ -363,7 +364,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btnSimpan) void onSimpan() {
-         if(foto == 3) {
+         if(foto >= 3) {
             parseToServer();
          } else {
             StyleableToast.makeText(DetailActivity.this, "Anda harus melengkapi minimal 3 foto yang diminta.", R.style.ToastGagal).show();
