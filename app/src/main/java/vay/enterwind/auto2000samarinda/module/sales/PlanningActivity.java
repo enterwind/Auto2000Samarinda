@@ -42,7 +42,7 @@ import vay.enterwind.auto2000samarinda.module.sales.plans.MapsActivity;
 import vay.enterwind.auto2000samarinda.module.sales.profil.UbahPasswordActivity;
 import vay.enterwind.auto2000samarinda.utils.Config;
 
-public class PlanningActivity extends BaseActivity {
+public class PlanningActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = "PlanningActivity";
     private static final int ACTIVITY_NUM = 1;
@@ -51,6 +51,8 @@ public class PlanningActivity extends BaseActivity {
     @BindView(R.id.btnAdd) FloatingActionButton btnAdd;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
     @BindView(R.id.kosong) CardView kosong;
+
+    @BindView(R.id.refreshLayout) SwipeRefreshLayout swipeRefresh;
 
     private List<Plan> planList = new ArrayList<>();
     private PlanAdapter mAdapter;
@@ -62,6 +64,7 @@ public class PlanningActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_planning);
         ButterKnife.bind(this);
+        swipeRefresh.setOnRefreshListener(this);
         dialog = new SpotsDialog(this);
         dialog.show();
 
@@ -138,5 +141,12 @@ public class PlanningActivity extends BaseActivity {
                 init();
             }
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        finish();
+        startActivity(getIntent());
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

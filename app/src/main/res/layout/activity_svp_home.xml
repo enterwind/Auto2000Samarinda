@@ -97,46 +97,6 @@
                         android:textColor="@color/black_semi_transparent"
                         android:textSize="18sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:fontFamily="@font/oswald"
-                        android:text=""
-                        android:textColor="@color/black_semi_transparent"
-                        android:textSize="23sp" />
-
-                    <TextView
-                        android:id="@+id/onlineSales"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-10dp"
-                        android:fontFamily="@font/oswald"
-                        android:text=""
-                        android:textColor="@color/black_semi_transparent"
-                        android:textSize="30sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/oswald"
-                        android:text=""
-                        android:textColor="@color/black_semi_transparent"
-                        android:textSize="23sp" />
-
-                    <TextView
-                        android:id="@+id/offlineSales"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-10dp"
-                        android:fontFamily="@font/oswald"
-                        android:text=""
-                        android:textColor="@color/black_semi_transparent"
-                        android:textSize="30sp"
-                        android:textStyle="bold" />
-
                 </LinearLayout>
 
             </RelativeLayout>

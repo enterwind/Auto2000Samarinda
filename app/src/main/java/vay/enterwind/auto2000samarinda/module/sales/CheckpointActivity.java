@@ -3,6 +3,7 @@ package vay.enterwind.auto2000samarinda.module.sales;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -33,7 +34,7 @@ import vay.enterwind.auto2000samarinda.adapter.CheckpointAdapter;
 import vay.enterwind.auto2000samarinda.models.Plan;
 import vay.enterwind.auto2000samarinda.utils.Config;
 
-public class CheckpointActivity extends BaseActivity {
+public class CheckpointActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = "CheckpointActivity";
     private static final int ACTIVITY_NUM = 2;
@@ -41,6 +42,8 @@ public class CheckpointActivity extends BaseActivity {
 
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
     @BindView(R.id.kosong) CardView kosong;
+
+    @BindView(R.id.refreshLayout) SwipeRefreshLayout swipeRefresh;
 
     private List<Plan> planList = new ArrayList<>();
     private CheckpointAdapter mAdapter;
@@ -52,6 +55,7 @@ public class CheckpointActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_checkpoint);
         ButterKnife.bind(this);
+        swipeRefresh.setOnRefreshListener(this);
         dialog = new SpotsDialog(this);
         dialog.show();
 
@@ -123,5 +127,12 @@ public class CheckpointActivity extends BaseActivity {
                 init();
             }
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        finish();
+        startActivity(getIntent());
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

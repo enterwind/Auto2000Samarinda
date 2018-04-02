@@ -34,9 +34,6 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     @BindView(R.id.jabatanTelepon) TextView jabatanTelepon;
     @BindView(R.id.namaLengkap) TextView namaLengkap;
 
-    @BindView(R.id.onlineSales) TextView onlineSales;
-    @BindView(R.id.offlineSales) TextView offlineSales;
-
     @BindView(R.id.refreshLayout) SwipeRefreshLayout swipeRefresh;
 
     AuthManagement session;

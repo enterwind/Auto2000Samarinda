@@ -60,8 +60,8 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     @BindView(R.id.refreshLayout) SwipeRefreshLayout swipeRefresh;
 
-    @BindView(R.id.btnConnect) ImageView btnConnect;
-    @BindView(R.id.btnDisconnect) ImageView btnDisconnect;
+//    @BindView(R.id.btnConnect) ImageView btnConnect;
+//    @BindView(R.id.btnDisconnect) ImageView btnDisconnect;
 
     AlertDialog.Builder dialog;
     LayoutInflater inflater;
@@ -124,12 +124,12 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                         JsonElement data = fuck.get("nameValuePairs");
                         if(data!= null) {
                             // Online
-                            btnConnect.setVisibility(View.VISIBLE);
-                            btnDisconnect.setVisibility(View.GONE);
+//                            btnConnect.setVisibility(View.VISIBLE);
+//                            btnDisconnect.setVisibility(View.GONE);
                         } else {
                             // Offline
-                            btnConnect.setVisibility(View.GONE);
-                            btnDisconnect.setVisibility(View.VISIBLE);
+//                            btnConnect.setVisibility(View.GONE);
+//                            btnDisconnect.setVisibility(View.VISIBLE);
                         }
 
                     }
@@ -172,42 +172,42 @@ public class HomeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         requestQueue.add(stringRequest);
     }
 
-    @OnClick(R.id.btnConnect) void onConnect() {
-        pubnubInit();
-    }
+//    @OnClick(R.id.btnConnect) void onConnect() {
+//        pubnubInit();
+//    }
 
-    @OnClick(R.id.btnDisconnect) void onDisconnect() {
-        dialog = new AlertDialog.Builder(HomeActivity.this);
-        inflater = getLayoutInflater();
-        dialogView = inflater.inflate(R.layout.form_leave, null);
-        dialog.setView(dialogView);
-        dialog.setCancelable(true);
-        dialog.setIcon(R.mipmap.ic_launcher);
-        dialog.setTitle("Alasan Izin Keluar");
-
-        txtAlasan = (EditText) dialogView.findViewById(R.id.txtAlasan);
-        dialog.setPositiveButton("KIRIM", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                // Unsubscribe
-
-                // Kirim Alasan Ke Server
-
-                dialog.dismiss();
-            }
-        });
-
-        dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
+//    @OnClick(R.id.btnDisconnect) void onDisconnect() {
+//        dialog = new AlertDialog.Builder(HomeActivity.this);
+//        inflater = getLayoutInflater();
+//        dialogView = inflater.inflate(R.layout.form_leave, null);
+//        dialog.setView(dialogView);
+//        dialog.setCancelable(true);
+//        dialog.setIcon(R.mipmap.ic_launcher);
+//        dialog.setTitle("Alasan Izin Keluar");
+//
+//        txtAlasan = (EditText) dialogView.findViewById(R.id.txtAlasan);
+//        dialog.setPositiveButton("KIRIM", new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//                // Unsubscribe
+//
+//                // Kirim Alasan Ke Server
+//
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        dialog.show();
+//    }
 
 }

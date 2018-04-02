@@ -16,6 +16,7 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <application
+        android:name=".utils.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -111,6 +112,7 @@
         <activity android:name=".pubnub.datastream.LoginActivity" />
         <activity android:name=".pubnub.datastream.MainActivity" />
         <activity android:name=".module.sales.plans.FotoActivity"></activity>
+
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package vay.enterwind.auto2000samarinda.module.supervisor.report;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -41,7 +42,7 @@ import vay.enterwind.auto2000samarinda.module.sales.RebutanActivity;
 import vay.enterwind.auto2000samarinda.module.sales.plans.AddPlanActivity;
 import vay.enterwind.auto2000samarinda.utils.Config;
 
-public class PlanActivity extends AppCompatActivity {
+public class PlanActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = "PlanActivity";
     private Context mContext = PlanActivity.this;
@@ -50,6 +51,8 @@ public class PlanActivity extends AppCompatActivity {
     @BindView(R.id.kosong) CardView kosong;
     @BindView(R.id.txtNama) TextView txtNama;
     @BindView(R.id.btnBack) ImageView btnBack;
+
+    @BindView(R.id.refreshLayout) SwipeRefreshLayout swipeRefresh;
 
     private List<Plan> planList = new ArrayList<>();
     private PlanAdapter mAdapter;
@@ -63,6 +66,7 @@ public class PlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spv_plan);
         ButterKnife.bind(this);
+        swipeRefresh.setOnRefreshListener(this);
 
         email = getIntent().getExtras().getString("EMAIL");
         nama = getIntent().getExtras().getString("NAMA");
@@ -136,4 +140,10 @@ public class PlanActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onRefresh() {
+        finish();
+        startActivity(getIntent());
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
 }

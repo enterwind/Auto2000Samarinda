@@ -22,7 +22,7 @@
     <item
         android:id="@+id/ic_profil_others"
         android:icon="@drawable/ic_profil"
-        android:title="Profil"
+        android:title="Profile"
         android:fontFamily="@font/oswald"/>
 
 </menu>

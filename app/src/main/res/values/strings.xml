@@ -23,4 +23,13 @@
     </string-array>
     <string name="title_activity_full_map">Sales Tracking</string>
     <string name="title_activity_sales_map">Sales Map</string>
+    <string name="google_maps_browser_key">AIzaSyBAHt81V_WHCG89nTm5Hbo8FfDbzUAmke8</string>
+
+    <string name="no_location_detected">
+        No location detected. Make sure location is enabled on the device.
+    </string>
+    <string name="permission_rationale">Location permission is needed for core functionality</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core
+        functionality.</string>
+    <string name="settings">Settings</string>
 </resources>

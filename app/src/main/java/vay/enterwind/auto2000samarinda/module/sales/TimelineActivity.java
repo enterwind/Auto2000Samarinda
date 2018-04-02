@@ -1,19 +1,26 @@
 package vay.enterwind.auto2000samarinda.module.sales;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -29,150 +36,101 @@ import butterknife.OnClick;
 import dmax.dialog.SpotsDialog;
 import vay.enterwind.auto2000samarinda.BaseActivity;
 import vay.enterwind.auto2000samarinda.R;
+import vay.enterwind.auto2000samarinda.adapter.FeedListAdapter;
 import vay.enterwind.auto2000samarinda.adapter.TimelineAdapter;
+import vay.enterwind.auto2000samarinda.models.FeedItem;
 import vay.enterwind.auto2000samarinda.models.Orientation;
 import vay.enterwind.auto2000samarinda.models.Timeline;
 import vay.enterwind.auto2000samarinda.models.Type;
 import vay.enterwind.auto2000samarinda.module.others.references.AddReferenceActivity;
+import vay.enterwind.auto2000samarinda.utils.AppController;
 import vay.enterwind.auto2000samarinda.utils.Config;
 
-public class TimelineActivity extends BaseActivity implements TimelineAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
-
+public class TimelineActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "TimelineActivity";
     private static final int ACTIVITY_NUM = 3;
     private Context mContext = TimelineActivity.this;
 
-    private TimelineAdapter mTimeLineAdapter;
-    private ArrayList<Timeline> mDataList;
-
-    private RequestQueue requestQueue;
-    private int requestCount = 1;
     SpotsDialog dialog;
 
     @BindView(R.id.refreshLayout) SwipeRefreshLayout swipeRefresh;
-    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     @BindView(R.id.btnAdd) FloatingActionButton btnAdd;
+    @BindView(R.id.kosong) CardView kosong;
 
+    @BindView(R.id.list) ListView listView;
+    private FeedListAdapter listAdapter;
+    private List<FeedItem> feedItems;
+
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_timeline);
         ButterKnife.bind(this);
-        dialog = new SpotsDialog(this);
         swipeRefresh.setOnRefreshListener(this);
+        dialog = new SpotsDialog(this);
+        dialog.show();
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mRecyclerView.setHasFixedSize(true);
-
-        initView();
-
+        initFeed();
         setupBottomNavigationView(mContext, ACTIVITY_NUM);
     }
 
-    private void initView() {
-        mDataList = new ArrayList<>();
-        requestQueue = Volley.newRequestQueue(this);
+    private void initFeed() {
+        feedItems = new ArrayList<FeedItem>();
+        listAdapter = new FeedListAdapter(this, feedItems);
+        listView.setAdapter(listAdapter);
 
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mTimeLineAdapter = new TimelineAdapter(this, this);
-        mRecyclerView.setAdapter(mTimeLineAdapter);
+        JsonObjectRequest jsonReq = new JsonObjectRequest(Request.Method.GET,
+                Config.URL_TIMELINE + "1", null, new Response.Listener<JSONObject>() {
 
-
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                LinearLayoutManager llManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (dy > 0 && llManager.findLastCompletelyVisibleItemPosition() == (mTimeLineAdapter.getItemCount() - 2)) {
-                    mTimeLineAdapter.showLoading();
+            public void onResponse(JSONObject response) {
+                VolleyLog.d(TAG, "Response: " + response.toString());
+                if (response != null) {
+                    parseJsonFeed(response);
                 }
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+            }
         });
+        AppController.getInstance().addToRequestQueue(jsonReq);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        requestCount = 1;
-        dialog.show();
-        getData();
-        mTimeLineAdapter.setMore(true);
+    private void parseJsonFeed(JSONObject response) {
+        try {
+            JSONArray feedArray = response.getJSONArray("feed");
+            if(feedArray.length() == 0) {
+                kosong.setVisibility(View.VISIBLE);
+                listView.setVisibility(View.GONE);
+            } else {
+                for (int i = 0; i < feedArray.length(); i++) {
+                    JSONObject feedObj = (JSONObject) feedArray.get(i);
+
+                    FeedItem item = new FeedItem();
+                    item.setId(feedObj.getInt("id"));
+                    item.setName(feedObj.getString("nama"));
+                    item.setStatus(feedObj.getString("pesan"));
+                    item.setProfilePic(feedObj.getString("foto"));
+                    item.setTimeStamp(feedObj.getString("created_at"));
+
+                    feedItems.add(item);
+                }
+                listAdapter.notifyDataSetChanged();
+            }
+            dialog.dismiss();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefresh.setRefreshing(false);
-                requestCount = 1;
-                getData();
-                mTimeLineAdapter.setMore(true);
-            }
-        }, 2000);
-    }
-
-    private void getData() {
-        requestQueue.add(getDataFromServer(requestCount));
-        mTimeLineAdapter.dismissLoading();
-        requestCount++;
-    }
-
-    private JsonArrayRequest getDataFromServer(final int requestCount) {
-        return new JsonArrayRequest(Config.URL_TIMELINE+ String.valueOf(requestCount),
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        parseData(response);
-                        dialog.dismiss();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        mTimeLineAdapter.dismissLoading();
-                        dialog.dismiss();
-                    }
-                });
-    }
-
-    private void parseData(JSONArray array) {
-        mDataList.clear();
-        for (int i = 0; i < array.length(); i++) {
-            JSONObject json;
-            try {
-                json = array.getJSONObject(i);
-
-                Type type = null;
-
-                if(json.getString(Config.TAG_STATUS).equals("1")) {
-                    type = Type.NONE;
-                }
-                if(json.getString(Config.TAG_STATUS).equals("2")) {
-                    type = Type.DOT;
-                }
-                if(json.getString(Config.TAG_STATUS).equals("3")) {
-                    type = Type.FULL;
-                }
-
-                mDataList.add(new Timeline(
-                        json.getString(Config.TAG_PESAN),
-                        json.getString(Config.TAG_CREATED_AT),
-                        type
-                ));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        mTimeLineAdapter.addItemMore(mDataList);
-        mTimeLineAdapter.dismissLoading();
-    }
-
-    @Override
-    public void onLoadMore() {
-        getData();
+        finish();
+        startActivity(getIntent());
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     @OnClick(R.id.btnAdd) void onAdd() {

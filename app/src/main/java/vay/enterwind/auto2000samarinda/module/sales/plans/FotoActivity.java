@@ -26,17 +26,6 @@ public class FotoActivity extends AppCompatActivity {
 
         mPhotoDraweeView = (PhotoDraweeView) findViewById(R.id.photo_drawee_view);
         mPhotoDraweeView.setPhotoUri(Uri.parse(getIntent().getExtras().getString("FOTO")));
-        mPhotoDraweeView.setOnPhotoTapListener(new OnPhotoTapListener() {
-            @Override public void onPhotoTap(View view, float x, float y) {
-                Toast.makeText(view.getContext(), "onPhotoTap :  x =  " + x + ";" + " y = " + y,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-//        mPhotoDraweeView.setOnViewTapListener(new OnViewTapListener() {
-//            @Override public void onViewTap(View view, float x, float y) {
-//                Toast.makeText(view.getContext(), "onViewTap", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
     }
 }

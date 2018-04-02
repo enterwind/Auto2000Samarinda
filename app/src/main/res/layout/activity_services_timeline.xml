@@ -5,72 +5,104 @@
     android:layout_height="match_parent"
     android:background="@color/light_transparent">
 
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="40dp">
 
         <RelativeLayout
+            android:id="@+id/relLayout1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp">
+            android:layout_height="75dp"
+            android:background="@color/colorPrimary">
 
-            <RelativeLayout
-                android:id="@+id/relLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@color/colorPrimary">
+            <ImageView
+                android:id="@+id/imgHeader"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/logo_putih" />
 
-                <ImageView
-                    android:id="@+id/imgHeader"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="20dp"
-                    android:paddingRight="10dp"
-                    android:src="@drawable/logo_putih" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Timeline"
-                    android:textColor="@color/putih"
-                    android:textStyle="bold"
-                    android:textSize="25sp"
-                    android:fontFamily="@font/oswald"
-                    android:layout_margin="20dp"/>
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/linLayout1"
-                android:layout_below="@id/relLayout1"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="40dp">
-
-                <android.support.v4.widget.SwipeRefreshLayout
-                    android:id="@+id/refreshLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:clipToPadding="false"/>
-
-                </android.support.v4.widget.SwipeRefreshLayout>
-
-            </LinearLayout>
+                android:text="Timeline"
+                android:textColor="@color/putih"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:fontFamily="@font/oswald"
+                android:layout_margin="20dp"/>
 
         </RelativeLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_below="@id/relLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_below="@+id/relLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-40dp">
+
+                <ListView
+                    android:id="@+id/list"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:divider="@null" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/kosong"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="1dp"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="20dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:src="@drawable/ic_kosong2"
+                            android:layout_marginTop="80dp"
+                            android:layout_marginBottom="10dp"
+                            android:paddingLeft="50dp"
+                            android:paddingRight="50dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="100dp"
+                            android:textColor="@color/grey"
+                            android:fontFamily="@font/oswald"
+                            android:textSize="16dp"
+                            android:text="Tidak Ada Aktivitas untuk Hari Ini."
+                            android:textAlignment="center"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
 
     <!-- Bottom Navigation -->
     <include layout="@layout/navigation_services" />

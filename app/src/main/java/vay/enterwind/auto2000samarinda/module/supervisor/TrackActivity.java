@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -47,7 +48,7 @@ import vay.enterwind.auto2000samarinda.module.supervisor.track.FullMapActivity;
 import vay.enterwind.auto2000samarinda.pubnub.Constants;
 import vay.enterwind.auto2000samarinda.utils.Config;
 
-public class TrackActivity extends BaseActivity {
+public class TrackActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "TrackActivity";
     private static final int ACTIVITY_NUM = 1;
     private Context mContext = TrackActivity.this;
@@ -55,6 +56,8 @@ public class TrackActivity extends BaseActivity {
     @BindView(R.id.btnMap) FloatingActionButton btnMap;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
     @BindView(R.id.kosong) CardView kosong;
+
+    @BindView(R.id.refreshLayout) SwipeRefreshLayout swipeRefresh;
 
     private List<Sales> salesList = new ArrayList<>();
     private TrackAdapter mAdapter;
@@ -67,6 +70,7 @@ public class TrackActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_svp_track);
         ButterKnife.bind(this);
+        swipeRefresh.setOnRefreshListener(this);
         dialog = new SpotsDialog(this);
         dialog.show();
 
@@ -151,5 +155,12 @@ public class TrackActivity extends BaseActivity {
 
     @OnClick(R.id.btnMap) void onMap() {
         startActivity(new Intent(TrackActivity.this, FullMapActivity.class));
+    }
+
+    @Override
+    public void onRefresh() {
+        finish();
+        startActivity(getIntent());
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

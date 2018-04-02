@@ -58,6 +58,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/imageView2"
         android:text="Auto2000 Toyota Samarinda"
+        android:textSize="17sp"
         android:textAlignment="center"
         android:fontFamily="@font/oswald"
         android:textColor="@color/black_semi_transparent"/>
@@ -69,7 +70,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/auto2000"
-        android:text="Versi Aplikasi 1.0"
+        android:text="Versi Aplikasi 1.1"
+        android:textSize="17sp"
         android:fontFamily="@font/oswald"
         android:textAlignment="center"
         android:textColor="@color/black_semi_transparent"/>
@@ -80,7 +82,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/versiAplikasi"
-        android:text="Copyright © The Enterwind Inc. X D'Canteen"
+        android:text="Copyright © 2018 The Enterwind Inc."
+        android:textSize="17sp"
         android:fontFamily="@font/oswald"
         android:textAlignment="center"
         android:textColor="@color/black_semi_transparent"/>
@@ -91,8 +94,30 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/copyright"
         android:text="All Rights Reserved."
+        android:textSize="17sp"
         android:fontFamily="@font/oswald"
         android:textAlignment="center"
         android:textColor="@color/black_semi_transparent"/>
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/reserved"
+        android:background="@drawable/btn_accent"
+        android:fontFamily="@font/oswald"
+        android:paddingTop="4dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="4dp"
+        android:text="Update Aplikasi"
+        android:textColor="@color/putih"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginEnd="50dp"/>
 
 </RelativeLayout>

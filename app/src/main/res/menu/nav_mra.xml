@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ic_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home"
+        android:fontFamily="@font/oswald"/>
+
+    <item
+        android:id="@+id/ic_plan"
+        android:icon="@drawable/ic_plus"
+        android:title="GR &amp; BP"
+        android:fontFamily="@font/oswald"/>
+
+    <item
+        android:id="@+id/ic_check"
+        android:icon="@drawable/ic_attach"
+        android:title="Others"
+        android:fontFamily="@font/oswald"/>
+
+    <item
+        android:id="@+id/ic_timeline"
+        android:icon="@drawable/ic_timeline"
+        android:title="Timeline"
+        android:fontFamily="@font/oswald"/>
+
+    <item
+        android:id="@+id/ic_profil"
+        android:icon="@drawable/ic_profil"
+        android:title="Profile"
+        android:fontFamily="@font/oswald"/>
+
+</menu>

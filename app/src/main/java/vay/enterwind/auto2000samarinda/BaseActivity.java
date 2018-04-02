@@ -119,7 +119,7 @@ public class BaseActivity extends AppCompatActivity implements LocationListener 
         refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
         if(sessionAkses.equals("2")) {
-            // pubnubInit();
+             pubnubInit();
         }
     }
 

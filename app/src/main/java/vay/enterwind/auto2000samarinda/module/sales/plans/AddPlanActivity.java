@@ -55,6 +55,8 @@ public class AddPlanActivity extends AppCompatActivity {
     AuthManagement session;
     String email;
 
+    String nAlamat, nTelepon, nNamaLengkap, nLongitude, nLatitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,55 +84,69 @@ public class AddPlanActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnSimpan) void onSimpan() {
         dialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.URL_PLAN + email + "/add",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if(response.equals("sukses")) {
-                            StyleableToast.makeText(AddPlanActivity.this, "Perencanaan Berhasil Dibuat!", R.style.ToastSukses).show();
-                            dialog.dismiss();
+        if(validasi()) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.URL_PLAN + email + "/add",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if(response.equals("sukses")) {
+                                StyleableToast.makeText(AddPlanActivity.this, "Perencanaan Berhasil Dibuat!", R.style.ToastSukses).show();
+                                dialog.dismiss();
 
-                            Intent intent = new Intent();
-                            setResult(RESULT_OK, intent);
-                            finish();
+                                Intent intent = new Intent();
+                                setResult(RESULT_OK, intent);
+                                finish();
 
-                        } else {
-                            StyleableToast.makeText(AddPlanActivity.this, "Maaf, terjadi gangguan koneksi atau ada masalah pada server kami.", R.style.ToastGagal).show();
+                            } else {
+                                StyleableToast.makeText(AddPlanActivity.this, "Maaf, terjadi gangguan koneksi atau ada masalah pada server kami.", R.style.ToastGagal).show();
+                                dialog.dismiss();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            StyleableToast.makeText(AddPlanActivity.this, "Koneksi kurang stabil, pastikan Anda terkoneksi dengan internet.", R.style.ToastGagal).show();
                             dialog.dismiss();
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        StyleableToast.makeText(AddPlanActivity.this, "Koneksi kurang stabil, pastikan Anda terkoneksi dengan internet.", R.style.ToastGagal).show();
-                        dialog.dismiss();
-                    }
-                }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
+                    }){
+                @Override
+                protected Map<String,String> getParams(){
+                    Map<String,String> params = new HashMap<String, String>();
 
-                params.put("nama", namaLengkap.getText().toString().trim());
-                params.put("telepon", telepon.getText().toString().trim());
-                params.put("alamat", alamat.getText().toString().trim());
-                params.put("longitude", longitude.getText().toString().trim());
-                params.put("latitude", latitude.getText().toString().trim());
+                    params.put("nama", namaLengkap.getText().toString().trim());
+                    params.put("telepon", telepon.getText().toString().trim());
+                    params.put("alamat", alamat.getText().toString().trim());
+                    params.put("longitude", longitude.getText().toString().trim());
+                    params.put("latitude", latitude.getText().toString().trim());
 
-                return params;
-            }
-        };
-        stringRequest.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {return 50000;}
-            @Override
-            public int getCurrentRetryCount() {return 50000;}
-            @Override
-            public void retry(VolleyError error) throws VolleyError {}
-        });
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+                    return params;
+                }
+            };
+            stringRequest.setRetryPolicy(new RetryPolicy() {
+                @Override
+                public int getCurrentTimeout() {return 50000;}
+                @Override
+                public int getCurrentRetryCount() {return 50000;}
+                @Override
+                public void retry(VolleyError error) throws VolleyError {}
+            });
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+        }
+    }
 
+    private boolean validasi() {
+        nAlamat = alamat.getText().toString().trim();
+        nTelepon = telepon.getText().toString().trim();
+        nNamaLengkap = namaLengkap.getText().toString().trim();
+        if (!nAlamat.isEmpty() && !nTelepon.isEmpty() && !nNamaLengkap.isEmpty()) {
+            return true;
+        } else {
+            Toast.makeText(getApplicationContext(), "Mohon lengkapi form yang diminta!", Toast.LENGTH_LONG).show();
+            dialog.dismiss();
+            return false;
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

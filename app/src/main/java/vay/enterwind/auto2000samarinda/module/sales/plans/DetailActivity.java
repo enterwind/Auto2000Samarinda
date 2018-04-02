@@ -4,11 +4,14 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,9 +55,11 @@ import vay.enterwind.auto2000samarinda.R;
 import vay.enterwind.auto2000samarinda.session.AuthManagement;
 import vay.enterwind.auto2000samarinda.utils.Config;
 
-public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback, SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = "DetailActivity";
+
+    @BindView(R.id.refreshLayout) SwipeRefreshLayout swipeRefresh;
 
     @BindView(R.id.btnBack) ImageView btnBack;
 
@@ -68,7 +73,8 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
     @BindView(R.id.foto3) ImageView foto3;
 
     String uuid, nama, urlFoto1, urlFoto2, urlFoto3;
-    Double longitude = 117.09580518, latitude = -0.52840624;
+    double long1, long2, long3, lat1, lat2, lat3;
+    LatLng lokasi1, lokasi2, lokasi3;
 
     SpotsDialog dialog;
 
@@ -81,13 +87,13 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_detail);
         ButterKnife.bind(this);
+        swipeRefresh.setOnRefreshListener(this);
 
         dialog = new SpotsDialog(this);
 
         init();
 
-        mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
@@ -113,11 +119,6 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
                     txtAlamat.setText(response.getString("alamat"));
                     txtCatatan.setText(response.getString("catatan"));
 
-                    if(response.getString("longitude") == null) {
-                        longitude = Double.valueOf(response.getString("longitude"));
-                        latitude = Double.valueOf(response.getString("latitude"));
-                    }
-
                     JSONArray photos = response.getJSONArray("foto");
 
                     for (int i = 0; i < photos.length(); i++) {
@@ -125,32 +126,97 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
                         JSONObject obj = photos.getJSONObject(i);
 
                         if(i == 0) {
+                            if(obj.getString("longitude") != null) {
+                                lat1 = Double.valueOf(obj.getString("latitude"));
+                                long1 = Double.valueOf(obj.getString("longitude"));
+                            }
                             urlFoto1 = obj.getString("foto");
                             Picasso.with(DetailActivity.this).load(urlFoto1)
                                     .error(R.mipmap.ic_launcher).placeholder(R.mipmap.ic_launcher)
                                     .into(foto1);
+
+                            lokasi1 = new LatLng(lat1, long1);
+                            Picasso.with(getApplicationContext())
+                                    .load(urlFoto1)
+                                    .resize(128, 128)
+                                    .into(new com.squareup.picasso.Target() {
+                                        @Override
+                                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                                            mMap.addMarker(new MarkerOptions().position(lokasi1).title("Foto 1")
+                                                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
+                                        }
+                                        @Override
+                                        public void onBitmapFailed(Drawable errorDrawable) {
+                                        }
+                                        @Override
+                                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+                                        }
+                                    });
                         }
 
                         if(i == 1) {
+                            if(obj.getString("longitude") != null) {
+                                lat2 = Double.valueOf(obj.getString("latitude"));
+                                long2 = Double.valueOf(obj.getString("longitude"));
+                            }
                             urlFoto2 = obj.getString("foto");
                             Picasso.with(DetailActivity.this).load(urlFoto2)
                                     .error(R.mipmap.ic_launcher).placeholder(R.mipmap.ic_launcher)
                                     .into(foto2);
+
+                            lokasi2 = new LatLng(lat2, long2);
+                            Picasso.with(getApplicationContext())
+                                    .load(urlFoto2)
+                                    .resize(128, 128)
+                                    .into(new com.squareup.picasso.Target() {
+                                        @Override
+                                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                                            mMap.addMarker(new MarkerOptions().position(lokasi2).title("Foto 2")
+                                                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
+                                        }
+                                        @Override
+                                        public void onBitmapFailed(Drawable errorDrawable) {
+                                        }
+                                        @Override
+                                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+                                        }
+                                    });
                         }
 
                         if(i == 2) {
+                            if(obj.getString("longitude") != null) {
+                                lat3 = Double.valueOf(obj.getString("latitude"));
+                                long3 = Double.valueOf(obj.getString("longitude"));
+                            }
                             urlFoto3 = obj.getString("foto");
                             Picasso.with(DetailActivity.this).load(urlFoto3)
                                     .error(R.mipmap.ic_launcher).placeholder(R.mipmap.ic_launcher)
                                     .into(foto3);
-                        }
 
-                        if(response.getString("longitude") == null) {
-                            longitude = Double.valueOf(obj.getString("longitude"));
-                            latitude = Double.valueOf(obj.getString("latitude"));
+                            lokasi3 = new LatLng(lat3, long3);
+                            Picasso.with(getApplicationContext())
+                                    .load(urlFoto3)
+                                    .resize(128, 128)
+                                    .into(new com.squareup.picasso.Target() {
+                                        @Override
+                                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                                            mMap.addMarker(new MarkerOptions().position(lokasi3).title("Foto 3")
+                                                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
+                                        }
+                                        @Override
+                                        public void onBitmapFailed(Drawable errorDrawable) {
+                                        }
+                                        @Override
+                                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+                                        }
+                                    });
                         }
 
                     }
+
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(lokasi1));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(21));
+
                     dialog.dismiss();
 
                 } catch (JSONException e) {
@@ -174,11 +240,6 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        LatLng lokasi = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(lokasi).title(nama));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(lokasi));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
     }
 
     @OnClick(R.id.foto1) void foto1() {
@@ -197,5 +258,16 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         Intent i = new Intent(DetailActivity.this, FotoActivity.class);
         i.putExtra("FOTO", urlFoto3);
         startActivity(i);
+    }
+
+    @OnClick(R.id.btnBack) void onBack() {
+        finish();
+    }
+
+    @Override
+    public void onRefresh() {
+        finish();
+        startActivity(getIntent());
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }
